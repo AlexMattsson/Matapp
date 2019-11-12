@@ -1,2 +1,3 @@
 # MagicBoltsResponse
-## Test
+  Response app for students.
+  
