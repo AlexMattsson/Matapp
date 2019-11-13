@@ -17,15 +17,15 @@
 
 ### Splash Screen
     Contains:
-    - Choose class with dropdown menu
-    - Choose which Restaurant you are eating at with two buttons
+    - Choose class dropdown menu
+    - Radio Buttons to choose restaurant
     - Button to confirm and continue
     - Welcoming text and logotype
 
 ### Vote Screen
     In order from top till bottom on all vote screens:
     - AppBar with logo, text and dropdown with help and settings
-    - Buttons to choose restaurant
+    - Radio Buttons to choose restaurant
     - Vote buttons(From Good, ok, bad, unacceptable)
     - Send button
     - Bottom navigation from food menu to vote and back.
@@ -44,10 +44,9 @@
 
 ### Settings Screen
     Contains:
-    - Choose class dropdown, same as splash screen
+    - Choose class dropdown menu, same as splash screen
     - Choose special eating habbit
     - Input field for admin key to see the vote statistics
 
 ### Menu Screen
     Contains:
-    - asda
