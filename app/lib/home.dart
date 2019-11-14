@@ -30,48 +30,51 @@ class _HomeState extends State<Home> {
                   style: TextStyle(fontSize: 25, color: Colors.deepPurple[900]),
                 ), */
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     IconButton(
                       padding: EdgeInsets.all(1.0),
                       icon: Icon(
                         Icons.sentiment_very_satisfied,
                         color: Colors.green[700],
-                        size: 50,
+                        size: 70,
                       ),
                     ),
                     SizedBox(
-                      width: 30,
+                      width: 40,
                     ),
                     IconButton(
                       padding: EdgeInsets.all(1.0),
                       icon: Icon(
                         Icons.sentiment_satisfied,
                         color: Colors.lime[700],
-                        size: 50,
+                        size: 70,
                       ),
                     ),
                     SizedBox(
-                      width: 30,
+                      width: 40,
                     ),
                     IconButton(
                       padding: EdgeInsets.all(1.0),
                       icon: Icon(
                         Icons.sentiment_dissatisfied,
                         color: Colors.deepOrange[400],
-                        size: 50,
+                        size: 70,
                       ),
                     ),
                     SizedBox(
-                      width: 30,
+                      width: 40,
                     ),
                     IconButton(
                       padding: EdgeInsets.all(1.0),
                       icon: Icon(
                         Icons.sentiment_very_dissatisfied,
                         color: Colors.red[800],
-                        size: 50,
+                        size: 70,
                       ),
+                    ),
+                    SizedBox(
+                      width: 30,
                     ),
                   ],
                 ),
@@ -83,11 +86,16 @@ class _HomeState extends State<Home> {
                   "Anledning",
                   style: TextStyle(fontSize: 25, color: Colors.grey[800]),
                 ),
-                new RaisedButton(
-                  color: Colors.indigo[800],
+                FlatButton(
+                  color: Colors.indigo[900],
+                  textColor: Colors.white,
+                  disabledColor: Colors.indigo[800],
+                  disabledTextColor: Colors.white,
+                  //padding: EdgeInsets.all(8.0),
+                  //splashColor: Colors.blueAccent,
                   child: Text(
                     'Skicka in',
-                    style: TextStyle(fontSize: 16, color: Colors.white),
+                    style: TextStyle(fontSize: 24),
                   ),
                 ),
               ],
