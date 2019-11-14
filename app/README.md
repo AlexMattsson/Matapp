@@ -1,6 +1,6 @@
 # app
 
-A food feedback app for Ntig Umeå
+Restaurant Response Flutter App
 
 ## Getting Started
 
