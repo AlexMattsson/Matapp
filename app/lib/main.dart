@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MaterialApp(
+import 'home.dart';
 
+void main() => runApp(MaterialApp(
+    initialRoute: "/",
+    routes: {
+      "/": (context) => Home(),
+    },
 ));
