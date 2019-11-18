@@ -1,4 +1,4 @@
-import 'package:app/Buttons/Dropdowns.dart';
+import 'package:app/Widgets/classDropdown.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -60,7 +60,7 @@ class _SplashScreenState extends State<SplashScreen> {
                                             ),
                                         ),
                                         SizedBox(width: 20,),
-                                        ChooseClassDropdown(),
+                                        ClassDropdown(),
                                     ],
                                 ),
                                 FlatButton(
