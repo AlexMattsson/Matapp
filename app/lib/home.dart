@@ -1,4 +1,4 @@
-import 'package:app/Buttons/Dropdowns.dart';
+import 'package:app/Buttons/reasonDropdowns.dart';
 import 'package:flutter/material.dart';
 
 TextEditingController controller = TextEditingController();
@@ -10,7 +10,6 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   bool _askedStaff = false;
-  String chooseReasonValue = "Ingen";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -116,6 +115,9 @@ class _HomeState extends State<Home> {
                     Text(
                       "Anledning",
                       style: TextStyle(fontSize: 24, color: Colors.grey[800]),
+                    ),
+                    SizedBox(
+                      width: 10,
                     ),
                     ChooseReasonDropdown(),
                   ],
