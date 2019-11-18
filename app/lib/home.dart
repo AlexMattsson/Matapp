@@ -1,4 +1,3 @@
-import 'package:app/Screens/settingsScreen.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -20,8 +19,7 @@ class _HomeState extends State<Home> {
                     icon: Icon(Icons.settings),
                     tooltip: "Öppna inställningar",
                     onPressed: () {
-                        Navigator.of(context).pushReplacement(
-                            new MaterialPageRoute(builder: (context) => new Settings()));
+                        Navigator.of(context).pushNamed("/settings");
                     },
                 )
             ],

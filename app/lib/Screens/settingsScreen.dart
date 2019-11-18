@@ -1,7 +1,9 @@
 import 'package:app/Widgets/ClassDropdown.dart';
 import 'package:flutter/material.dart';
+import '../home.dart';
 
 class Settings extends StatefulWidget {
+
     @override
     _SettingsState createState() => _SettingsState();
 }
@@ -15,8 +17,7 @@ class _SettingsState extends State<Settings> {
                     icon: Icon(Icons.arrow_back),
                     tooltip: "Gå tillbaka",
                     onPressed: () {
-                        Navigator.of(context).pushReplacement(
-                            new MaterialPageRoute(builder: (context) => new Settings()));
+                        Navigator.of(context).pop();
 
                     },
                 ),
