@@ -7,7 +7,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   String chooseClassValue = "TE15";
 
   @override
@@ -19,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/SplashBG.png"),
-             fit: BoxFit.cover,
+            fit: BoxFit.cover,
           ),
         ),
         child: Row(
@@ -27,8 +26,9 @@ class _SplashScreenState extends State<SplashScreen> {
           children: <Widget>[
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Icon( //Logo
+              children: <Widget>[
+                Icon(
+                  //Logo
                   Icons.local_bar,
                   color: Colors.white,
                   size: 100.0,
@@ -64,9 +64,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 FlatButton(
                   color: Colors.indigo[800],
                   padding: EdgeInsets.all(8),
-                  onPressed: () {
-
-                  },
+                  onPressed: () {},
                   child: Text(
                     "Start",
                     style: TextStyle(

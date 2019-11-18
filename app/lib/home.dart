@@ -1,4 +1,7 @@
+import 'package:app/Buttons/Dropdowns.dart';
 import 'package:flutter/material.dart';
+
+TextEditingController controller = TextEditingController();
 
 class Home extends StatefulWidget {
   @override
@@ -6,6 +9,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  bool _askedStaff = false;
+  String chooseReasonValue = "Ingen";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +35,7 @@ class _HomeState extends State<Home> {
                   style: TextStyle(fontSize: 25, color: Colors.deepPurple[900]),
                 ), */
                 Row(
-                  //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     IconButton(
                       padding: EdgeInsets.all(1.0),
@@ -39,6 +44,9 @@ class _HomeState extends State<Home> {
                         color: Colors.green[700],
                         size: 70,
                       ),
+                      onPressed: () {
+                        print("filled background");
+                      },
                     ),
                     SizedBox(
                       width: 40,
@@ -50,6 +58,9 @@ class _HomeState extends State<Home> {
                         color: Colors.lime[700],
                         size: 70,
                       ),
+                      onPressed: () {
+                        print("filled background");
+                      },
                     ),
                     SizedBox(
                       width: 40,
@@ -61,6 +72,9 @@ class _HomeState extends State<Home> {
                         color: Colors.deepOrange[400],
                         size: 70,
                       ),
+                      onPressed: () {
+                        print("filled background");
+                      },
                     ),
                     SizedBox(
                       width: 40,
@@ -72,19 +86,43 @@ class _HomeState extends State<Home> {
                         color: Colors.red[800],
                         size: 70,
                       ),
+                      onPressed: () {
+                        print("filled background");
+                      },
                     ),
                     SizedBox(
                       width: 30,
                     ),
                   ],
                 ),
-                Text(
-                  "Informerat personal?",
-                  style: TextStyle(fontSize: 25, color: Colors.grey[800]),
+                Row(
+                  children: <Widget>[
+                    Text(
+                      "Informerat personal?",
+                      style: TextStyle(fontSize: 24, color: Colors.grey[800]),
+                    ),
+                    Checkbox(
+                      onChanged: (bool resp) {
+                        setState(() {
+                          _askedStaff = resp;
+                        });
+                      },
+                      value: _askedStaff,
+                    ),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    Text(
+                      "Anledning",
+                      style: TextStyle(fontSize: 24, color: Colors.grey[800]),
+                    ),
+                    ChooseReasonDropdown(),
+                  ],
                 ),
                 Text(
-                  "Anledning",
-                  style: TextStyle(fontSize: 25, color: Colors.grey[800]),
+                  "Orsak:",
+                  style: TextStyle(fontSize: 24, color: Colors.grey[800]),
                 ),
                 FlatButton(
                   color: Colors.indigo[900],
