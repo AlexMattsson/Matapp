@@ -36,68 +36,59 @@ class _HomeState extends State<Home> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    IconButton(
-                      padding: EdgeInsets.all(1.0),
-                      icon: Icon(
-                        Icons.sentiment_very_satisfied,
-                        color: Colors.green[700],
-                        size: 70,
-                      ),
-                      onPressed: () {
-                        print("filled background");
-                      },
+                    SizedBox(
+                        height: 70.0,
+                        width: 70.0,
+                        child: IconButton(
+                          padding: EdgeInsets.all(0.0),
+                          color: Colors.green[700],
+                          icon:
+                              Icon(Icons.sentiment_very_satisfied, size: 70.0),
+                          onPressed: () {},
+                        )),
+                    SizedBox(
+                      width: 20,
                     ),
                     SizedBox(
-                      width: 40,
-                    ),
-                    IconButton(
-                      padding: EdgeInsets.all(1.0),
-                      icon: Icon(
-                        Icons.sentiment_satisfied,
-                        color: Colors.lime[700],
-                        size: 70,
-                      ),
-                      onPressed: () {
-                        print("filled background");
-                      },
+                        height: 70.0,
+                        width: 70.0,
+                        child: IconButton(
+                          padding: EdgeInsets.all(0.0),
+                          color: Colors.lime[700],
+                          icon: Icon(Icons.sentiment_satisfied, size: 70.0),
+                          onPressed: () {},
+                        )),
+                    SizedBox(
+                      width: 20,
                     ),
                     SizedBox(
-                      width: 40,
-                    ),
-                    IconButton(
-                      padding: EdgeInsets.all(1.0),
-                      icon: Icon(
-                        Icons.sentiment_dissatisfied,
-                        color: Colors.deepOrange[400],
-                        size: 70,
-                      ),
-                      onPressed: () {
-                        print("filled background");
-                      },
+                        height: 70.0,
+                        width: 70.0,
+                        child: IconButton(
+                          padding: EdgeInsets.all(0.0),
+                          color: Colors.deepOrange[400],
+                          icon: Icon(Icons.sentiment_dissatisfied, size: 70.0),
+                          onPressed: () {},
+                        )),
+                    SizedBox(
+                      width: 20,
                     ),
                     SizedBox(
-                      width: 40,
-                    ),
-                    IconButton(
-                      padding: EdgeInsets.all(1.0),
-                      icon: Icon(
-                        Icons.sentiment_very_dissatisfied,
-                        color: Colors.red[800],
-                        size: 70,
-                      ),
-                      onPressed: () {
-                        print("filled background");
-                      },
-                    ),
-                    SizedBox(
-                      width: 30,
-                    ),
+                        height: 70.0,
+                        width: 70.0,
+                        child: IconButton(
+                          padding: EdgeInsets.all(0.0),
+                          color: Colors.red[800],
+                          icon: Icon(Icons.sentiment_very_dissatisfied,
+                              size: 70.0),
+                          onPressed: () {},
+                        )),
                   ],
                 ),
                 Row(
                   children: <Widget>[
                     Text(
-                      "Informerat personal?",
+                      "Informerat personsal?",
                       style: TextStyle(fontSize: 24, color: Colors.grey[800]),
                     ),
                     Checkbox(
@@ -137,6 +128,7 @@ class _HomeState extends State<Home> {
                     'Skicka in',
                     style: TextStyle(fontSize: 24),
                   ),
+                  onPressed: () {},
                 ),
               ],
             ),
