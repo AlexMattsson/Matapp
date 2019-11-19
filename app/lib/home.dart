@@ -10,24 +10,31 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   bool _askedStaff = false;
+  Color _goodColor = Colors.green[700];
+  Color _okColor = Colors.lime[700];
+  Color _dissatisfiedColor = Colors.deepOrange[400];
+  Color _badColor = Colors.red[800];
+  int _rating;
+  String _reason;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-            backgroundColor: Colors.indigo[800],
-            title: Text(
-                "NTI MATAPP",
-            ),
-            actions: <Widget>[
-                IconButton(
-                    icon: Icon(Icons.settings),
-                    tooltip: "Öppna inställningar",
-                    onPressed: () {
-                        Navigator.of(context).pushNamed("/settings");
-                    },
-                )
-            ],
+      appBar: AppBar(
+        backgroundColor: Colors.indigo[800],
+        title: Text(
+          "NTI MATAPP",
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.settings),
+            tooltip: "Öppna inställningar",
+            onPressed: () {
+              Navigator.of(context).pushNamed("/settings");
+            },
+          )
+        ],
+      ),
       body: Container(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -47,10 +54,22 @@ class _HomeState extends State<Home> {
                         width: 70.0,
                         child: IconButton(
                           padding: EdgeInsets.all(0.0),
-                          color: Colors.green[700],
-                          icon:
-                              Icon(Icons.sentiment_very_satisfied, size: 70.0),
-                          onPressed: () {},
+                          color: _goodColor,
+                          icon: Icon(
+                            Icons.sentiment_very_satisfied,
+                            size: 70.0,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _rating = 3;
+                              _goodColor = Colors.black;
+                              if (_rating == 3) {
+                                _okColor = Colors.lime[700];
+                                _dissatisfiedColor = Colors.deepOrange[400];
+                                _badColor = Colors.red[800];
+                              }
+                            });
+                          },
                         )),
                     SizedBox(
                       width: 20,
@@ -60,9 +79,19 @@ class _HomeState extends State<Home> {
                         width: 70.0,
                         child: IconButton(
                           padding: EdgeInsets.all(0.0),
-                          color: Colors.lime[700],
+                          color: _okColor,
                           icon: Icon(Icons.sentiment_satisfied, size: 70.0),
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              _rating = 2;
+                              _okColor = Colors.black;
+                              if (_rating == 2) {
+                                _goodColor = Colors.green[700];
+                                _dissatisfiedColor = Colors.deepOrange[400];
+                                _badColor = Colors.red[800];
+                              }
+                            });
+                          },
                         )),
                     SizedBox(
                       width: 20,
@@ -72,9 +101,20 @@ class _HomeState extends State<Home> {
                         width: 70.0,
                         child: IconButton(
                           padding: EdgeInsets.all(0.0),
-                          color: Colors.deepOrange[400],
+                          //color: Colors.deepOrange[400],
+                          color: _dissatisfiedColor,
                           icon: Icon(Icons.sentiment_dissatisfied, size: 70.0),
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              _rating = 1;
+                              _dissatisfiedColor = Colors.black;
+                              if (_rating == 1) {
+                                _goodColor = Colors.green[700];
+                                _okColor = Colors.lime[700];
+                                _badColor = Colors.red[800];
+                              }
+                            });
+                          },
                         )),
                     SizedBox(
                       width: 20,
@@ -84,17 +124,27 @@ class _HomeState extends State<Home> {
                         width: 70.0,
                         child: IconButton(
                           padding: EdgeInsets.all(0.0),
-                          color: Colors.red[800],
+                          color: _badColor,
                           icon: Icon(Icons.sentiment_very_dissatisfied,
                               size: 70.0),
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              _rating = 0;
+                              _badColor = Colors.black;
+                              if (_rating == 0) {
+                                _goodColor = Colors.green[700];
+                                _okColor = Colors.lime[700];
+                                _dissatisfiedColor = Colors.deepOrange[400];
+                              }
+                            });
+                          },
                         )),
                   ],
                 ),
                 Row(
                   children: <Widget>[
                     Text(
-                      "Informerat personsal?",
+                      "Informerat personal?",
                       style: TextStyle(fontSize: 24, color: Colors.grey[800]),
                     ),
                     Checkbox(
@@ -134,7 +184,12 @@ class _HomeState extends State<Home> {
                     'Skicka in',
                     style: TextStyle(fontSize: 24),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {});
+                  },
+                ),
+                Text(
+                  "$_rating, $_askedStaff",
                 ),
               ],
             ),
