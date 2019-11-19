@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ChooseClassDropdown extends StatefulWidget {
+class ClassDropdown extends StatefulWidget {
 
     @override
-    _ChooseClassDropdownState createState() {
-        return _ChooseClassDropdownState();
+    _ClassDropdownState createState() {
+        return _ClassDropdownState();
     }
 
 }
 
-class _ChooseClassDropdownState extends State<ChooseClassDropdown> {
+class _ClassDropdownState extends State<ClassDropdown> {
 
     static List<String> classes = ["TE15", "TE16", "TE17", "TE18", "TE19"];
 
@@ -67,7 +67,7 @@ class _ChooseClassDropdownState extends State<ChooseClassDropdown> {
 }
 
 class DropdownData {
-    static String _dropdownValue = _ChooseClassDropdownState._value;
+    static String _dropdownValue = _ClassDropdownState._value;
 
     static Future<bool> isDropdownValueSet() async {
         final prefs = await SharedPreferences.getInstance();
