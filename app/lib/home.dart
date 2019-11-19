@@ -13,15 +13,21 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.indigo[800],
-        title: Text(
-          "NTI MATAPP",
+        appBar: AppBar(
+            backgroundColor: Colors.indigo[800],
+            title: Text(
+                "NTI MATAPP",
+            ),
+            actions: <Widget>[
+                IconButton(
+                    icon: Icon(Icons.settings),
+                    tooltip: "Öppna inställningar",
+                    onPressed: () {
+                        Navigator.of(context).pushNamed("/settings");
+                    },
+                )
+            ],
         ),
-      ),
-      /////////////////
-      ////////////////
-
       body: Container(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

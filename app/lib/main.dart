@@ -1,6 +1,7 @@
 import 'package:app/splashScreen.dart';
 import 'package:flutter/material.dart';
 
+import 'Screens/settingsScreen.dart';
 import 'home.dart';
 
 void main() => runApp(MaterialApp(
@@ -8,5 +9,6 @@ void main() => runApp(MaterialApp(
       routes: {
         "/": (context) => Home(),
         "/splash": (context) => SplashScreen(),
+        "/settings": (context) => Settings(),
       },
     ));
