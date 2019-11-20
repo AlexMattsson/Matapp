@@ -13,11 +13,12 @@ class _SplashScreenState extends State<SplashScreen>{
     @override
     Widget build(BuildContext context) {
 
-        DropdownData.isDropdownValueSet().then((value) {
+        /*DropdownData.isDropdownValueSet(key).then((value) {
             if (value == true) {
-                Navigator.of(context).pushReplacementNamed("/home");
+                Navigator.of(context).pushReplacementNamed("/");
             }
-        });
+        });*/
+
         return Scaffold(
             backgroundColor: Colors.blue,
             body: Container(
@@ -72,7 +73,6 @@ class _SplashScreenState extends State<SplashScreen>{
                                     padding: EdgeInsets.all(8),
                                     onPressed: () async {
                                         Navigator.of(context).pushReplacementNamed("/");
-                                        DropdownData.initializeDropDownValue();
                                         print("Going to next page");
                                     },
                                     child: Text(
