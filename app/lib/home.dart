@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'Widgets/classDropdown.dart';
+
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -8,6 +10,14 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+
+    DropdownData.isDropdownValueSet("userClass").then((value) {
+      print("is the value set? $value");
+      if (value == false) {
+        Navigator.of(context).pushReplacementNamed("/splash");
+      }
+    });
+
     return Scaffold(
         appBar: AppBar(
             backgroundColor: Colors.indigo[800],
