@@ -1,6 +1,5 @@
 import 'package:app/Widgets/ClassDropdown.dart';
 import 'package:flutter/material.dart';
-import '../home.dart';
 
 class Settings extends StatefulWidget {
 

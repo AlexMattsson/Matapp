@@ -12,9 +12,24 @@ class ClassDropdown extends StatefulWidget {
 
 class _ClassDropdownState extends State<ClassDropdown> {
 
+
+    String key = "userClass";
+
+    @override
+    initState() {
+        super.initState();
+        DropdownData.getUserClass(key).then((value){
+            setState(() {
+                updateValues(value);
+            });
+        });
+    }
+
     static List<String> classes = ["TE15", "TE16", "TE17", "TE18", "TE19"];
 
-    static String _value;
+    static String currentValue;
+
+    static String currentValueNamed;
 
     List<DropdownMenuItem<String>> getMenuItems() {
         List<DropdownMenuItem<String>> items = [];
@@ -33,12 +48,20 @@ class _ClassDropdownState extends State<ClassDropdown> {
     }
 
 
+    updateValues(value) {
+        currentValue = value;
+        currentValueNamed = classes[int.parse(currentValue)-1];
+    }
 
     @override
     Widget build(BuildContext context) {
-        return Center(
-            child: Container(
-              child: DropdownButton<String>(
+
+        print("$currentValue , $currentValueNamed");
+
+                  return Center(
+                  child: Container(
+                  child: DropdownButton<String>(
+                  value: currentValue,
                   icon: Icon(
                       Icons.arrow_downward,
                       color: Colors.white,
@@ -50,16 +73,13 @@ class _ClassDropdownState extends State<ClassDropdown> {
                   items: getMenuItems(),
                   onChanged: (String value) {
                       setState(() {
-                          _value = value;
+                          updateValues(value);
                       });
+                      DropdownData.updateStorageDropdownValue(key);
                   },
                   hint: Text(
-                      "TE15",
-                      style: TextStyle(
-                          color: Colors.white,
-                      ),
+                      "$currentValueNamed",
                   ),
-                  value: _value,
               ),
             ),
         );
@@ -67,31 +87,34 @@ class _ClassDropdownState extends State<ClassDropdown> {
 }
 
 class DropdownData {
-    static String _dropdownValue = _ClassDropdownState._value;
 
-    static Future<bool> isDropdownValueSet() async {
+    //Returns if dropdown value is set or not.
+    static Future<bool> isDropdownValueSet(key) async {
         final prefs = await SharedPreferences.getInstance();
-        String userClass = prefs.getString('userClass');
+        String userClass = prefs.getString(key);
         if (userClass == null) {
             return false;
         } else {
             return true;
         }
-
     }
 
-    static initializeDropDownValue() async {
+
+    // Returns the value of user class from local storage
+    static Future<String> getUserClass(key) async {
         final prefs = await SharedPreferences.getInstance();
-        String userClass = prefs.getString('userClass');
-        print("Setting dropdown data to $_dropdownValue");
-        if (userClass != null) {
-            _dropdownValue = userClass;
+        String userClass = prefs.getString(key);
+        if (userClass == null) {
+            return _ClassDropdownState.classes[0];
+        } else {
+            return userClass;
         }
     }
-    // Needs to be called from a separate
-    static updateStorageDropdownValue() async {
+
+    //Updates the value class value at the local storage
+    static updateStorageDropdownValue(key) async {
         final prefs = await SharedPreferences.getInstance();
-        prefs.setString('userClass', _dropdownValue);
+        prefs.setString(key, _ClassDropdownState.currentValue);
     }
 
 }
