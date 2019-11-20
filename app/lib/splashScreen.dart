@@ -1,21 +1,25 @@
 import 'package:app/Widgets/classDropdown.dart';
 import 'package:flutter/material.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends StatefulWidget{
     @override
     _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends State<SplashScreen>{
 
-    String chooseClassValue = "TE15";
+
 
     @override
     Widget build(BuildContext context) {
-        return Scaffold(
 
+        DropdownData.isDropdownValueSet().then((value) {
+            if (value == true) {
+                Navigator.of(context).pushReplacementNamed("/home");
+            }
+        });
+        return Scaffold(
             backgroundColor: Colors.blue,
-            //TODO Build splash screen
             body: Container(
                 decoration: BoxDecoration(
                     image: DecorationImage(
@@ -66,8 +70,10 @@ class _SplashScreenState extends State<SplashScreen> {
                                 FlatButton(
                                     color: Colors.indigo[800],
                                     padding: EdgeInsets.all(8),
-                                    onPressed: () {
-
+                                    onPressed: () async {
+                                        Navigator.of(context).pushReplacementNamed("/");
+                                        DropdownData.initializeDropDownValue();
+                                        print("Going to next page");
                                     },
                                     child: Text(
                                         "Start",
@@ -86,3 +92,5 @@ class _SplashScreenState extends State<SplashScreen> {
         );
     }
 }
+
+
