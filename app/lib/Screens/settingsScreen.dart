@@ -1,3 +1,4 @@
+import 'package:app/Widgets/AccessKeyWidget.dart';
 import 'package:app/Widgets/ClassDropdown.dart';
 import 'package:app/Widgets/dietDropdownWidget.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +40,7 @@ class _SettingsState extends State<Settings> {
                                     ],
                                 ),
                                 new DietDropdownWidget(),
+                                new AccessKeyWidget(),
                             ]
                         )
                     ],
