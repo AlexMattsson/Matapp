@@ -2,13 +2,12 @@ import 'package:app/Widgets/classDropdown.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget{
+
     @override
     _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen>{
-
-
 
     @override
     Widget build(BuildContext context) {
@@ -71,7 +70,7 @@ class _SplashScreenState extends State<SplashScreen>{
                                 FlatButton(
                                     color: Colors.indigo[800],
                                     padding: EdgeInsets.all(8),
-                                    onPressed: () async {
+                                    onPressed: () {
                                         Navigator.of(context).pushReplacementNamed("/");
                                         print("Going to next page");
                                     },
