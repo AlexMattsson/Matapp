@@ -75,8 +75,6 @@ class _ClassDropdownState extends State<ClassDropdown> {
 
     @override
     Widget build(BuildContext context) {
-        print("$currentValue , $currentValueNamed");
-
         return Center(
             child: Container(
                 child: Theme(
