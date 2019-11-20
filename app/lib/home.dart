@@ -15,7 +15,9 @@ class _HomeState extends State<Home> {
   Color _dissatisfiedColor = Colors.deepOrange[400];
   Color _badColor = Colors.red[800];
   int _rating;
-  String _reason;
+  String chooseReasonValue = "Kall mat";
+  //String _value;
+  //String reasons;
 
   @override
   Widget build(BuildContext context) {
@@ -174,20 +176,19 @@ class _HomeState extends State<Home> {
                   style: TextStyle(fontSize: 24, color: Colors.grey[800]),
                 ),
                 FlatButton(
-                  color: Colors.indigo[900],
-                  textColor: Colors.white,
-                  disabledColor: Colors.indigo[800],
-                  disabledTextColor: Colors.white,
-                  //padding: EdgeInsets.all(8.0),
-                  //splashColor: Colors.blueAccent,
-                  child: Text(
-                    'Skicka in',
-                    style: TextStyle(fontSize: 24),
-                  ),
-                  onPressed: () {
-                    setState(() {});
-                  },
-                ),
+                    color: Colors.indigo[900],
+                    textColor: Colors.white,
+                    disabledColor: Colors.indigo[800],
+                    disabledTextColor: Colors.white,
+                    //padding: EdgeInsets.all(8.0),
+                    //splashColor: Colors.blueAccent,
+                    child: Text(
+                      'Skicka in',
+                      style: TextStyle(fontSize: 24),
+                    ),
+                    onPressed: () {
+                      setState(() {});
+                    }),
                 Text(
                   "$_rating, $_askedStaff",
                 ),
