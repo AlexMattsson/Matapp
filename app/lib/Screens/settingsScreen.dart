@@ -1,4 +1,5 @@
 import 'package:app/Widgets/ClassDropdown.dart';
+import 'package:app/Widgets/dietDropdownWidget.dart';
 import 'package:flutter/material.dart';
 import '../home.dart';
 
@@ -18,7 +19,6 @@ class _SettingsState extends State<Settings> {
                     tooltip: "Gå tillbaka",
                     onPressed: () {
                         Navigator.of(context).pop();
-
                     },
                 ),
                 backgroundColor: Colors.indigo[800],
@@ -31,14 +31,15 @@ class _SettingsState extends State<Settings> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                         Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
                                 Row(
                                     children: <Widget>[
                                         Text("Klass "),
                                         ClassDropdown(),
                                     ],
-                                )
+                                ),
+                                new DietDropdownWidget(),
                             ]
                         )
                     ],
