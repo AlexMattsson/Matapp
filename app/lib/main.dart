@@ -5,10 +5,10 @@ import 'Screens/settingsScreen.dart';
 import 'home.dart';
 
 void main() => runApp(MaterialApp(
-      initialRoute: "/",
-      routes: {
-        "/": (context) => Home(),
-        "/splash": (context) => SplashScreen(),
+    initialRoute: "/",
+    routes: {
+      "/": (context) => Home(),
+      "/splash": (context) => SplashScreen(),
         "/settings": (context) => Settings(),
-      },
-    ));
+    },
+));
