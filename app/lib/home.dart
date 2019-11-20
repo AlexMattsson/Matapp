@@ -162,7 +162,7 @@ class _HomeState extends State<Home> {
                 Row(
                   children: <Widget>[
                     Text(
-                      "Anledning:",
+                      "Anledning",
                       style: TextStyle(fontSize: 24, color: Colors.grey[800]),
                     ),
                     SizedBox(
