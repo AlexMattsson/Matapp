@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'classDropdown.dart';
+
 class AccessKeyWidget extends StatefulWidget {
     @override
     AccessKeyState createState() => new AccessKeyState();
@@ -9,31 +11,28 @@ class AccessKeyWidget extends StatefulWidget {
 }
 
 class AccessKeyState extends State<AccessKeyWidget> {
-    String _fieldValue = 'init val';
+    String _fieldValue;
     TextEditingController _controller = TextEditingController();
 
     @override
     initState() {
         super.initState();
-        this.initializeDropDownValue();
-    }
+        DropdownData.getKeyValue('accessField').then((value) {
+            setState(() {
+                _fieldValue = value;
+                _controller.text = value;
+            });
+        });
 
-    // The content of this function needs to be in a async function.
-    initializeDropDownValue() async {
-        final prefs = await SharedPreferences.getInstance();
-        String userClass = prefs.getString('accessField');
-        if (userClass != null) {
-            _fieldValue = userClass;
-        }
     }
-
     @override
     Widget build(BuildContext context) {
+        print('Field value: $_fieldValue');
         return Container(
             width: 200,
             child: TextFormField(
                 obscureText: true,
-                initialValue: _fieldValue,
+                controller: _controller,
                 decoration: const InputDecoration(
                     labelText: 'Access key: ',
                 ),
@@ -42,6 +41,7 @@ class AccessKeyState extends State<AccessKeyWidget> {
                         _fieldValue = newValue;
                         // Call the storage update
                         updateStorageDropdownValue();
+
                     });
                 },
             ),
@@ -50,7 +50,7 @@ class AccessKeyState extends State<AccessKeyWidget> {
 
     updateStorageDropdownValue() async {
         final prefs = await SharedPreferences.getInstance();
-        print(_fieldValue);
+//        print(_fieldValue);
         prefs.setString('accessField', _fieldValue);
     }
 }
