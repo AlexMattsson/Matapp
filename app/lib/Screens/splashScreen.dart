@@ -1,4 +1,4 @@
-import 'package:app/Widgets/dropdownWidget.dart';
+//import 'package:app/Widgets/dropdownWidget.dart';
 import 'package:app/Widgets/classDropdown.dart';
 import 'package:flutter/material.dart';
 
@@ -65,25 +65,25 @@ class _SplashScreenState extends State<SplashScreen>{
                                             storageKey: "userClass",
                                             lightTheme: false,
                                         ),
-                                   ],
+                                    ],
                                 ),
                                 Row(
-                                  children: <Widget>[
-                                      Text(
-                                          "Eating habit",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 16.0,
-                                              letterSpacing: 1.0,
-                                          ),
-                                      ),
-                                      SizedBox(width: 20,),
-                                      DropdownWidget(
-                                          classes: ["Vegetarian", "Vegan", "No Fish", "Only pizza", "Veg", "Veg", "Veg", "Veg", "Veg", "Veg"],
-                                          storageKey: "eatingHabit",
-                                          lightTheme: false,
-                                      ),
-                                  ],
+                                    children: <Widget>[
+                                        Text(
+                                            "Eating habit",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16.0,
+                                                letterSpacing: 1.0,
+                                            ),
+                                        ),
+                                        SizedBox(width: 20,),
+                                        DropdownWidget(
+                                            classes: ["Vegetarian", "Vegan", "No Fish", "Only pizza", "Veg", "Veg", "Veg", "Veg", "Veg", "Veg"],
+                                            storageKey: "eatingHabit",
+                                            lightTheme: false,
+                                        ),
+                                    ],
                                 ),
                                 FlatButton(
                                     color: Colors.indigo[800],
@@ -108,5 +108,4 @@ class _SplashScreenState extends State<SplashScreen>{
         );
     }
 }
-
 
