@@ -1,25 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ClassDropdown extends StatefulWidget {
+class DropdownWidget extends StatefulWidget {
+    final List<String> classes;
+    final bool lightTheme;
+    final String storageKey;
+    DropdownWidget({
+        @required this.classes,
+        @required this.storageKey,
+        this.lightTheme = false
+    });
+
     @override
-    _ClassDropdownState createState() {
-        return _ClassDropdownState();
-    }
+    _DropdownWidgetState createState() => _DropdownWidgetState();
 }
 
-class _ClassDropdownState extends State<ClassDropdown> {
-    //Values passed from constructor
-    String key = "userClass";
-    bool light = false;
-    static List<String> classes = ["TE15", "TE16", "TE17", "TE18", "TE19"];
+class _DropdownWidgetState extends State<DropdownWidget> {
 
     @override
     initState() {
         super.initState();
-        DropdownData.isDropdownValueSet(key).then((set) {
+        DropdownData.isDropdownValueSet(widget.storageKey).then((set) {
             if (set == true) {
-                DropdownData.getKeyValue(key).then((value) {
+                DropdownData.getKeyValue(widget.storageKey).then((value) {
                     setState(() {
                         updateValues(value);
                     });
@@ -41,10 +44,10 @@ class _ClassDropdownState extends State<ClassDropdown> {
         List<DropdownMenuItem<String>> items = [];
         DropdownMenuItem<String> item;
 
-        for (int i = 0; i < classes.length; i++) {
+        for (int i = 0; i < widget.classes.length; i++) {
             int value = i + 1;
             item = DropdownMenuItem<String>(
-                child: Text(classes[i]),
+                child: Text(widget.classes[i]),
                 value: "$value",
             );
             items.add(item);
@@ -55,28 +58,18 @@ class _ClassDropdownState extends State<ClassDropdown> {
     //Updating Values
     updateValues(value) {
         currentValue = value;
-        currentValueNamed = classes[int.parse(currentValue) - 1];
+        currentValueNamed = widget.classes[int.parse(currentValue) - 1];
     }
 
-    getBGColor() {
-        if (light == true) {
-            return Colors.white;
-        } else {
-            return Colors.indigo;
-        }
+    Color getBGColor() {
+        return widget.lightTheme ? Colors.white : Colors.indigo[800];
     }
-    getTextColor() {
-        if (light == true) {
-            return Colors.grey[800];
-        } else {
-            return Colors.white;
-        }
+    Color getTextColor() {
+        return widget.lightTheme ? Colors.grey[800] : Colors.white;
     }
 
     @override
     Widget build(BuildContext context) {
-        print("$currentValue , $currentValueNamed");
-
         return Center(
             child: Container(
                 child: Theme(
@@ -87,7 +80,7 @@ class _ClassDropdownState extends State<ClassDropdown> {
                         value: currentValue,
                         icon: Icon(
                             Icons.arrow_downward,
-                            color: Colors.white,
+                            color: getTextColor(),
                         ),
                         style: TextStyle(
                             color: getTextColor(),
@@ -97,7 +90,7 @@ class _ClassDropdownState extends State<ClassDropdown> {
                             setState(() {
                                 updateValues(value);
                             });
-                            DropdownData.updateStorageDropdownValue(key);
+                            DropdownData.updateStorageDropdownValue(widget.storageKey);
                         },
                         hint: Text(
                             "$currentValueNamed",
@@ -134,6 +127,6 @@ class DropdownData {
     //Updates the value class value at the local storage
     static updateStorageDropdownValue(key) async {
         final prefs = await SharedPreferences.getInstance();
-        prefs.setString(key, _ClassDropdownState.currentValue);
+        prefs.setString(key, _DropdownWidgetState.currentValue);
     }
 }

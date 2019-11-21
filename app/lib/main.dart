@@ -1,10 +1,10 @@
-import 'package:app/splashScreen.dart';
 import 'package:flutter/material.dart';
 
 import 'Screens/settingsScreen.dart';
+import 'Screens/splashScreen.dart';
 import 'home.dart';
 
-void main() => runApp(MaterialApp(
+void main() async => runApp(MaterialApp(
     initialRoute: "/",
     routes: {
       "/": (context) => Home(),

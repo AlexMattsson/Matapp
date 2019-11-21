@@ -1,6 +1,7 @@
 import 'package:app/Buttons/reasonDropdowns.dart';
 import 'package:flutter/material.dart';
 
+
 TextEditingController controller = TextEditingController();
 
 class Home extends StatefulWidget {
@@ -16,9 +17,15 @@ class _HomeState extends State<Home> {
   Color _badColor = Colors.red[800];
   int _rating;
   String reasonValue = "Kall mat";
+  bool _buttonEnabled;
   //String _value;
   //String reasons;
 
+  Function _button(){
+    if(_rating != null) {
+      _buttonEnabled = true;
+    } else _buttonEnabled = false;
+  }
   void _showDialog() {
     showDialog(
       context: context,
@@ -197,16 +204,21 @@ class _HomeState extends State<Home> {
                 FlatButton(
                     color: Colors.indigo[900],
                     textColor: Colors.white,
-                    disabledColor: Colors.indigo[800],
+                    disabledColor: Colors.green[300],
                     disabledTextColor: Colors.white,
                     //padding: EdgeInsets.all(8.0),
                     //splashColor: Colors.blueAccent,
                     child: Text(
                       'Skicka in',
                       style: TextStyle(fontSize: 24),
+
                     ),
                     onPressed: () {
-                      _showDialog();
+                      if(_rating != null){
+                        _showDialog();
+                      } else {
+                        debugPrint("You have to give a rating");
+                      }
                     }),
                 Text(
                   "$_rating, $_askedStaff",
