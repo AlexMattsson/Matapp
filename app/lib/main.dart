@@ -5,7 +5,7 @@ import 'Screens/settingsScreen.dart';
 import 'Screens/splashScreen.dart';
 
 void main() async => runApp(MaterialApp(
-    initialRoute: "/splash",
+    initialRoute: "/",
     routes: {
       "/": (context) => Home(),
       "/splash": (context) => SplashScreen(),
