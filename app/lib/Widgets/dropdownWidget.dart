@@ -1,5 +1,5 @@
+import 'package:app/Utilities/PersistentStorage.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class DropdownWidget extends StatefulWidget {
     final List<String> classes;
@@ -20,9 +20,9 @@ class _DropdownWidgetState extends State<DropdownWidget> {
     @override
     initState() {
         super.initState();
-        DropdownData.isDropdownValueSet(widget.storageKey).then((set) {
+        PersistentStorage.isKeySet(widget.storageKey).then((set) {
             if (set == true) {
-                DropdownData.getKeyValue(widget.storageKey).then((value) {
+                PersistentStorage.get(widget.storageKey).then((value) {
                     setState(() {
                         updateValues(value);
                     });
@@ -90,7 +90,7 @@ class _DropdownWidgetState extends State<DropdownWidget> {
                             setState(() {
                                 updateValues(value);
                             });
-                            DropdownData.updateStorageDropdownValue(widget.storageKey);
+                            PersistentStorage.set(widget.storageKey, _DropdownWidgetState.currentValue);
                         },
                         hint: Text(
                             "$currentValueNamed",
@@ -102,31 +102,5 @@ class _DropdownWidgetState extends State<DropdownWidget> {
                 ),
             ),
         );
-    }
-}
-
-class DropdownData {
-    //Returns if dropdown value is set or not.
-    static Future<bool> isDropdownValueSet(key) async {
-        final prefs = await SharedPreferences.getInstance();
-        String userClass = prefs.getString(key);
-        if (userClass == null) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    // Returns the value of user class from local storage
-    static Future<String> getKeyValue(key) async {
-        final prefs = await SharedPreferences.getInstance();
-        String keyValue = prefs.getString(key);
-        return keyValue;
-    }
-
-    //Updates the value class value at the local storage
-    static updateStorageDropdownValue(key) async {
-        final prefs = await SharedPreferences.getInstance();
-        prefs.setString(key, _DropdownWidgetState.currentValue);
     }
 }

@@ -1,5 +1,6 @@
-import 'package:app/Widgets/dropdownWidget.dart';
+import 'package:app/Widgets/AccessKeyWidget.dart';
 import 'package:app/Widgets/dropdownWidget.dart' as prefix0;
+import 'package:app/Widgets/dietDropdownWidget.dart';
 import 'package:flutter/material.dart';
 
 class Settings extends StatefulWidget {
@@ -31,7 +32,7 @@ class _SettingsState extends State<Settings> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                         Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
                                 Row(
                                     children: <Widget>[
@@ -42,7 +43,9 @@ class _SettingsState extends State<Settings> {
                                             lightTheme: true,
                                         ),
                                     ],
-                                )
+                                ),
+                                new DietDropdownWidget(),
+                                new AccessKeyWidget(),
                             ]
                         )
                     ],

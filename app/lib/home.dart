@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'Widgets/dropdownWidget.dart';
+import 'Utilities/PersistentStorage.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -11,7 +11,8 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
 
-    DropdownData.isDropdownValueSet("userClass").then((value) {
+
+    PersistentStorage.isKeySet("userClass").then((value) {
       if (value == false) {
         Navigator.of(context).pushReplacementNamed("/splash");
       }
