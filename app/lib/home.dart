@@ -12,7 +12,6 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
 
     DropdownData.isDropdownValueSet("userClass").then((value) {
-      print("is the value set? $value");
       if (value == false) {
         Navigator.of(context).pushReplacementNamed("/splash");
       }

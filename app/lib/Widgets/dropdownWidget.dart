@@ -62,7 +62,7 @@ class _DropdownWidgetState extends State<DropdownWidget> {
     }
 
     Color getBGColor() {
-        return widget.lightTheme ? Colors.white : Colors.indigo;
+        return widget.lightTheme ? Colors.white : Colors.indigo[800];
     }
     Color getTextColor() {
         return widget.lightTheme ? Colors.grey[800] : Colors.white;

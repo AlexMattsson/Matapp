@@ -55,11 +55,34 @@ class _SplashScreenState extends State<SplashScreen>{
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 16.0,
+                                                letterSpacing: 1.0,
                                             ),
                                         ),
                                         SizedBox(width: 20,),
-                                        DropdownWidget(),
-                                    ],
+                                        DropdownWidget(
+                                            classes: ["TE15", "TE16", "TE17", "TE18", "TE19"],
+                                            storageKey: "userClass",
+                                            lightTheme: false,
+                                        ),
+                                   ],
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                      Text(
+                                          "Eating habit",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16.0,
+                                              letterSpacing: 1.0,
+                                          ),
+                                      ),
+                                      SizedBox(width: 20,),
+                                      DropdownWidget(
+                                          classes: ["Vegetarian", "Vegan", "No Fish", "Only pizza", "Veg", "Veg", "Veg", "Veg", "Veg", "Veg"],
+                                          storageKey: "eatingHabit",
+                                          lightTheme: false,
+                                      ),
+                                  ],
                                 ),
                                 FlatButton(
                                     color: Colors.indigo[800],
