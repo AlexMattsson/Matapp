@@ -1,4 +1,5 @@
-import 'package:app/Widgets/ClassDropdown.dart';
+import 'package:app/Widgets/AccessKeyWidget.dart';
+import 'package:app/Widgets/dropdownWidget.dart';
 import 'package:flutter/material.dart';
 
 class Settings extends StatefulWidget {
@@ -27,18 +28,37 @@ class _SettingsState extends State<Settings> {
             ),
             body: Container(
                 child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                        Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                                Row(
-                                    children: <Widget>[
-                                        Text("Klass "),
-                                        ClassDropdown(),
-                                    ],
-                                )
-                            ]
+                        Padding(
+                            padding: const EdgeInsets.only(left: 50),
+                            child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                    Row(
+                                        children: <Widget>[
+                                            Text("Klass "),
+                                            DropdownWidget(
+                                                classes: ["TE15", "TE16", "TE17", "TE18", "TE19"],
+                                                storageKey: "userClass",
+                                                lightTheme: true,
+                                            ),
+                                        ],
+                                    ),
+                                    Row(
+                                        children: <Widget>[
+                                            Text("Kost "),
+                                            DropdownWidget(
+                                                classes: ["Vegetarian", "Vegan", "No Fish", "Only pizza"],
+                                                storageKey: "eatingHabit",
+                                                lightTheme: true,
+                                            ),
+                                        ],
+                                    ),
+
+                                    new AccessKeyWidget(),
+                                ]
+                            ),
                         )
                     ],
                 ),

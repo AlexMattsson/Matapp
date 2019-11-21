@@ -1,4 +1,5 @@
-import 'package:app/Buttons/reasonDropdowns.dart';
+import 'package:app/Utilities/PersistentStorage.dart';
+import 'package:app/Widgets/dropdownWidget.dart';
 import 'package:flutter/material.dart';
 
 
@@ -16,23 +17,18 @@ class _HomeState extends State<Home> {
   Color _dissatisfiedColor = Colors.deepOrange[400];
   Color _badColor = Colors.red[800];
   int _rating;
-  String reasonValue = "Kall mat";
+  String _reason;
   bool _buttonEnabled;
   //String _value;
   //String reasons;
 
-  Function _button(){
-    if(_rating != null) {
-      _buttonEnabled = true;
-    } else _buttonEnabled = false;
-  }
   void _showDialog() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           title: new Text("Success"),
-          content: new Text("Su har nu skickat in din respons"),
+          content: new Text("Su har nu skickat in din respons. Values: $_rating, $_askedStaff, $_reason"),
           actions: <Widget>[
             new FlatButton(
               child: new Text("Close"),
@@ -47,6 +43,12 @@ class _HomeState extends State<Home> {
   }
   @override
   Widget build(BuildContext context) {
+
+    PersistentStorage.isKeySet("userClass").then((value) {
+      if (value == false) {
+        Navigator.of(context).pushReplacementNamed("/splash");
+      }
+    });
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.indigo[800],
@@ -194,7 +196,11 @@ class _HomeState extends State<Home> {
                     SizedBox(
                       width: 10,
                     ),
-                    ReasonDropdown(),
+                    DropdownWidget(
+                      classes: ["badFood", "vegan", "fish",],
+                      storageKey: "reasonValue",
+                      lightTheme: true,
+                    ),
                   ],
                 ),
                 Text(
@@ -213,16 +219,15 @@ class _HomeState extends State<Home> {
                       style: TextStyle(fontSize: 24),
 
                     ),
-                    onPressed: () {
+                    onPressed: () async {
+                      String reason = await PersistentStorage.get("reasonValue");
+                      _reason = reason;
                       if(_rating != null){
                         _showDialog();
                       } else {
                         debugPrint("You have to give a rating");
                       }
                     }),
-                Text(
-                  "$_rating, $_askedStaff",
-                ),
               ],
             ),
           ],
