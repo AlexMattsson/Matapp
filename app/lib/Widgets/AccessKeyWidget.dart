@@ -1,8 +1,6 @@
 import 'package:app/Utilities/PersistentStorage.dart';
-import 'package:app/Widgets/dropdownWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AccessKeyWidget extends StatefulWidget {
     @override
@@ -40,17 +38,10 @@ class AccessKeyState extends State<AccessKeyWidget> {
                     setState(() {
                         _fieldValue = newValue;
                         // Call the storage update
-                        updateStorageDropdownValue();
-
+                        PersistentStorage.set('accessField', _fieldValue);
                     });
                 },
             ),
         );
-    }
-
-    updateStorageDropdownValue() async {
-        final prefs = await SharedPreferences.getInstance();
-//        print(_fieldValue);
-        prefs.setString('accessField', _fieldValue);
     }
 }
