@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:app/home.dart';
 
-class ChooseReasonDropdown extends StatefulWidget {
+class ReasonDropdown extends StatefulWidget {
   @override
-  _ChooseReasonDropdownState createState() {
-    return _ChooseReasonDropdownState();
+  _ReasonDropdownState createState() {
+    return _ReasonDropdownState();
   }
 }
 
-class _ChooseReasonDropdownState extends State<ChooseReasonDropdown> {
+class _ReasonDropdownState extends State<ReasonDropdown> {
   String _value;
 
   List<String> reasons = [

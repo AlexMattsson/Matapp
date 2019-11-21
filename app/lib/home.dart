@@ -15,10 +15,29 @@ class _HomeState extends State<Home> {
   Color _dissatisfiedColor = Colors.deepOrange[400];
   Color _badColor = Colors.red[800];
   int _rating;
-  String chooseReasonValue = "Kall mat";
+  String reasonValue = "Kall mat";
   //String _value;
   //String reasons;
 
+  void _showDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: new Text("Success"),
+          content: new Text("Su har nu skickat in din respons"),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -168,7 +187,7 @@ class _HomeState extends State<Home> {
                     SizedBox(
                       width: 10,
                     ),
-                    ChooseReasonDropdown(),
+                    ReasonDropdown(),
                   ],
                 ),
                 Text(
@@ -187,7 +206,7 @@ class _HomeState extends State<Home> {
                       style: TextStyle(fontSize: 24),
                     ),
                     onPressed: () {
-                      setState(() {});
+                      _showDialog();
                     }),
                 Text(
                   "$_rating, $_askedStaff",
