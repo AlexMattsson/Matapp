@@ -1,21 +1,19 @@
-import 'package:app/Buttons/Dropdowns.dart';
+import 'package:app/Widgets/dropdownWidget.dart';
 import 'package:flutter/material.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends StatefulWidget{
+
     @override
     _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
-
-    String chooseClassValue = "TE15";
+class _SplashScreenState extends State<SplashScreen>{
 
     @override
     Widget build(BuildContext context) {
-        return Scaffold(
 
+        return Scaffold(
             backgroundColor: Colors.blue,
-            //TODO Build splash screen
             body: Container(
                 decoration: BoxDecoration(
                     image: DecorationImage(
@@ -60,14 +58,14 @@ class _SplashScreenState extends State<SplashScreen> {
                                             ),
                                         ),
                                         SizedBox(width: 20,),
-                                        ChooseClassDropdown(),
+                                        DropdownWidget(),
                                     ],
                                 ),
                                 FlatButton(
                                     color: Colors.indigo[800],
                                     padding: EdgeInsets.all(8),
                                     onPressed: () {
-
+                                        Navigator.of(context).pop();
                                     },
                                     child: Text(
                                         "Start",
@@ -86,3 +84,5 @@ class _SplashScreenState extends State<SplashScreen> {
         );
     }
 }
+
+
