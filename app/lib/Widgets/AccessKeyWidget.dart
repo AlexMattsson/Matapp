@@ -1,8 +1,8 @@
+import 'package:app/Utilities/PersistentStorage.dart';
+import 'package:app/Widgets/dropdownWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'classDropdown.dart';
 
 class AccessKeyWidget extends StatefulWidget {
     @override
@@ -17,7 +17,7 @@ class AccessKeyState extends State<AccessKeyWidget> {
     @override
     initState() {
         super.initState();
-        DropdownData.getKeyValue('accessField').then((value) {
+        PersistentStorage.get('accessField').then((value) {
             setState(() {
                 _fieldValue = value;
                 _controller.text = value;
