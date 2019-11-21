@@ -1,5 +1,5 @@
 import 'package:app/Widgets/AccessKeyWidget.dart';
-import 'package:app/Widgets/ClassDropdown.dart';
+import 'package:app/Widgets/dropdownWidget.dart' as prefix0;
 import 'package:app/Widgets/dietDropdownWidget.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +19,7 @@ class _SettingsState extends State<Settings> {
                     tooltip: "Gå tillbaka",
                     onPressed: () {
                         Navigator.of(context).pop();
+
                     },
                 ),
                 backgroundColor: Colors.indigo[800],
@@ -36,7 +37,11 @@ class _SettingsState extends State<Settings> {
                                 Row(
                                     children: <Widget>[
                                         Text("Klass "),
-                                        ClassDropdown(),
+                                        prefix0.DropdownWidget(
+                                            classes: ["TE15", "TE16", "TE17", "TE18", "TE19"],
+                                            storageKey: "userClass",
+                                            lightTheme: true,
+                                        ),
                                     ],
                                 ),
                                 new DietDropdownWidget(),
