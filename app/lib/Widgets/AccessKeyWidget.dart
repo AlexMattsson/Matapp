@@ -25,7 +25,6 @@ class AccessKeyState extends State<AccessKeyWidget> {
     }
     @override
     Widget build(BuildContext context) {
-        print('Field value: $_fieldValue');
         return Container(
             width: 200,
             child: TextFormField(
