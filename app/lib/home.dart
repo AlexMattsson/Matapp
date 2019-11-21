@@ -1,4 +1,6 @@
 import 'package:app/Utilities/PersistentStorage.dart';
+import 'package:app/Widgets/ReasonFieldWidget.dart';
+import 'package:app/Widgets/buttonWidget.dart';
 import 'package:app/Widgets/dropdownWidget.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +20,7 @@ class _HomeState extends State<Home> {
   Color _badColor = Colors.red[800];
   int _rating;
   String _reason;
+  String _field;
   bool _buttonEnabled;
   //String _value;
   //String reasons;
@@ -28,7 +31,7 @@ class _HomeState extends State<Home> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: new Text("Success"),
-          content: new Text("Su har nu skickat in din respons. Values: $_rating, $_askedStaff, $_reason"),
+          content: new Text("Du har nu skickat in din respons. Values: $_rating, $_askedStaff, $_reason, $_field"),
           actions: <Widget>[
             new FlatButton(
               child: new Text("Close"),
@@ -65,17 +68,15 @@ class _HomeState extends State<Home> {
           )
         ],
       ),
+
       body: Container(
         child: Row(
+
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                /* Text(
-                  'matapp',
-                  style: TextStyle(fontSize: 25, color: Colors.deepPurple[900]),
-                ), */
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -197,37 +198,29 @@ class _HomeState extends State<Home> {
                       width: 10,
                     ),
                     DropdownWidget(
-                      classes: ["badFood", "vegan", "fish",],
+                      classes: ["Kall mat", "Lång Kö", "Ihåliga Nuggets", "Ogillade Maten", "Annat"],
                       storageKey: "reasonValue",
                       lightTheme: true,
                     ),
                   ],
                 ),
-                Text(
-                  "Orsak:",
-                  style: TextStyle(fontSize: 24, color: Colors.grey[800]),
-                ),
-                FlatButton(
-                    color: Colors.indigo[900],
-                    textColor: Colors.white,
-                    disabledColor: Colors.green[300],
-                    disabledTextColor: Colors.white,
-                    //padding: EdgeInsets.all(8.0),
-                    //splashColor: Colors.blueAccent,
-                    child: Text(
-                      'Skicka in',
-                      style: TextStyle(fontSize: 24),
-
-                    ),
+                /*Visibility(child: ReasonFieldWidget(),
+                visible: _reason != 5),*/
+                ReasonFieldWidget(),
+                ButtonWidget(
+                  text: "Skicka in",
                     onPressed: () async {
                       String reason = await PersistentStorage.get("reasonValue");
+                      String field = await PersistentStorage.get("reasonField");
                       _reason = reason;
+                      _field = field;
                       if(_rating != null){
                         _showDialog();
                       } else {
                         debugPrint("You have to give a rating");
                       }
-                    }),
+                    }
+                ),
               ],
             ),
           ],

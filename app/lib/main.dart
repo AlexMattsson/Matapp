@@ -9,6 +9,6 @@ void main() async => runApp(MaterialApp(
     routes: {
       "/": (context) => Home(),
       "/splash": (context) => SplashScreen(),
-        "/settings": (context) => Settings(),
+      "/settings": (context) => Settings(),
     },
 ));
