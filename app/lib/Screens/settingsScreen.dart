@@ -1,5 +1,5 @@
-import 'package:app/Widgets/ClassDropdown.dart';
-import 'package:app/Widgets/classDropdown.dart' as prefix0;
+import 'package:app/Widgets/dropdownWidget.dart';
+import 'package:app/Widgets/dropdownWidget.dart' as prefix0;
 import 'package:flutter/material.dart';
 
 class Settings extends StatefulWidget {
@@ -36,7 +36,7 @@ class _SettingsState extends State<Settings> {
                                 Row(
                                     children: <Widget>[
                                         Text("Klass "),
-                                        prefix0.ClassDropdown(
+                                        prefix0.DropdownWidget(
                                             classes: ["TE15", "TE16", "TE17", "TE18", "TE19"],
                                             storageKey: "userClass",
                                             lightTheme: true,
