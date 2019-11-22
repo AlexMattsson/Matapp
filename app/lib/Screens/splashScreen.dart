@@ -1,3 +1,5 @@
+import 'package:app/Utilities/nti_logo_icons.dart';
+import 'package:app/Widgets/buttonWidget.dart';
 import 'package:app/Widgets/dropdownWidget.dart';
 import 'package:flutter/material.dart';
 
@@ -28,12 +30,12 @@ class _SplashScreenState extends State<SplashScreen>{
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
                                 Icon( //Logo
-                                    Icons.local_bar,
+                                    NtiLogo.NTI_LOGO,
                                     color: Colors.white,
-                                    size: 100.0,
+                                    size: 200.0,
                                 ),
                                 Text(
-                                    "Welcome to the food rate app",
+                                    "Välkommen till Matappen!",
                                     style: TextStyle(
                                         fontSize: 24.0,
                                         fontWeight: FontWeight.bold,
@@ -42,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen>{
                                     ),
                                 ),
                                 Text(
-                                    "Please fill in some information before we start!",
+                                    "Vänligen fyll i lite information innan vi kör igång!",
                                     style: TextStyle(
                                         color: Colors.white,
                                         letterSpacing: 1.0,
@@ -51,30 +53,44 @@ class _SplashScreenState extends State<SplashScreen>{
                                 Row(
                                     children: <Widget>[
                                         Text(
-                                            "Choose class",
+                                            "Klass:",
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 16.0,
+                                                letterSpacing: 1.0,
                                             ),
                                         ),
-                                        SizedBox(width: 20,),
-                                        DropdownWidget(),
-                                    ],
+                                        SizedBox(width: 10,),
+                                        DropdownWidget(
+                                            classes: ["TE15", "TE16", "TE17", "TE18", "TE19"],
+                                            storageKey: "userClass",
+                                            lightTheme: false,
+                                        ),
+                                   ],
                                 ),
-                                FlatButton(
-                                    color: Colors.indigo[800],
-                                    padding: EdgeInsets.all(8),
+                                Row(
+                                  children: <Widget>[
+                                      Text(
+                                          "Specialkost:",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16.0,
+                                              letterSpacing: 1.0,
+                                          ),
+                                      ),
+                                      SizedBox(width: 10,),
+                                      DropdownWidget(
+                                          classes: ["Vegetarian", "Vegan", "No Fish", "Only pizza", "Veg", "Veg", "Veg", "Veg", "Veg", "Veg"],
+                                          storageKey: "eatingHabit",
+                                          lightTheme: false,
+                                      ),
+                                  ],
+                                ),
+                                ButtonWidget(
+                                    text: "Tap to get a cookie",
                                     onPressed: () {
                                         Navigator.of(context).pop();
                                     },
-                                    child: Text(
-                                        "Start",
-                                        style: TextStyle(
-                                            letterSpacing: 2.0,
-                                            color: Colors.white,
-                                            fontSize: 30.0,
-                                        ),
-                                    ),
                                 ),
                             ],
                         ),
