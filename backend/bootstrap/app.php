@@ -103,4 +103,5 @@ $app->router->group([
     require __DIR__.'/../routes/api.php';
 });
 
+$app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 return $app;
