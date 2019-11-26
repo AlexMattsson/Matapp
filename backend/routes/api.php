@@ -1,6 +1,6 @@
 <?php
 
 
-$router->get('/', function () use ($router) {
-    dd("Hello world");
-});
+$router->get('/classes/get', 'api\ClassController@index');
+
+$router->post('/feedback/store', 'api\FeedbackController@store');
