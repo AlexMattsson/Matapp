@@ -79,8 +79,8 @@ class _SplashScreenState extends State<SplashScreen>{
                                           ),
                                       ),
                                       SizedBox(width: 10,),
-                                      DropdownWidget(
-                                          classes: ["Vegetarian", "Vegan", "No Fish", "Only pizza", "Veg", "Veg", "Veg", "Veg", "Veg", "Veg"],
+                                      new DropdownWidget(
+                                          classes: ["Vegetarian", "Vegan", "No Fish", "Only pizza"],
                                           storageKey: "eatingHabit",
                                           lightTheme: false,
                                       ),

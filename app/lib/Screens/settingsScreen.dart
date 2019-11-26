@@ -1,4 +1,3 @@
-import 'package:app/Widgets/AccessKeyWidget.dart';
 import 'package:app/Widgets/dropdownWidget.dart';
 import 'package:flutter/material.dart';
 
@@ -37,7 +36,7 @@ class _SettingsState extends State<Settings> {
                                 children: <Widget>[
                                     Row(
                                         children: <Widget>[
-                                            Text("Klass "),
+                                            Text("Klass"),
                                             DropdownWidget(
                                                 classes: ["TE15", "TE16", "TE17", "TE18", "TE19"],
                                                 storageKey: "userClass",
@@ -55,8 +54,6 @@ class _SettingsState extends State<Settings> {
                                             ),
                                         ],
                                     ),
-
-                                    new AccessKeyWidget(),
                                 ]
                             ),
                         )

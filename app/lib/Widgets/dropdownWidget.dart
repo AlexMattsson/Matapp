@@ -8,7 +8,8 @@ class DropdownWidget extends StatefulWidget {
     DropdownWidget({
         @required this.classes,
         @required this.storageKey,
-        this.lightTheme = false
+        this.lightTheme = false,
+
     });
 
     @override
@@ -29,7 +30,7 @@ class _DropdownWidgetState extends State<DropdownWidget> {
                 });
             } else {
                 setState(() {
-                    currentValueNamed = "Välj klass";
+                    currentValueNamed = "Välj";
                 });
             }
         });
@@ -58,7 +59,9 @@ class _DropdownWidgetState extends State<DropdownWidget> {
     //Updating Values
     updateValues(value) {
         currentValue = value;
+        PersistentStorage.set(widget.storageKey, value);
         currentValueNamed = widget.classes[int.parse(currentValue) - 1];
+        print("Value: $value, Current Value: $currentValue, Named: $currentValueNamed");
     }
 
     Color getBGColor() {
@@ -90,7 +93,6 @@ class _DropdownWidgetState extends State<DropdownWidget> {
                             setState(() {
                                 updateValues(value);
                             });
-                            PersistentStorage.set(widget.storageKey, _DropdownWidgetState.currentValue);
                         },
                         hint: Text(
                             "$currentValueNamed",
