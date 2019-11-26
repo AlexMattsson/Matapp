@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class SchoolClasses extends Model
 {
     protected $table = 'schoolclasses';
-    
+
     protected $hidden = [
         'resturant_id',
         'valid'
