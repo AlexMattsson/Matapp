@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class SchoolClasses extends Model
 {
+    protected $table = 'schoolclasses';
+
     public function resturant()
     {
-        return $this->hasOne('App\Resturant');
+        return $this->belongsTo('App\Resturant');
     }
 }

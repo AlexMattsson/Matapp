@@ -19,7 +19,7 @@ class CreateFeedbackTable extends Migration
             $table->string('diet', 24);
             $table->string('resturant', 24);
             $table->string('user_id', 36);
-            $table->unsignedTinyInteger('rating', 4);
+            $table->tinyInteger('rating', false, true);
             $table->boolean('staff_informed')->default(0);
             $table->string('cause', 20)->nullable();
             $table->string('additional_feedback', 128)->nullable();

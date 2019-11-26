@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSchoolClassessTable extends Migration
+class CreateSchoolClassesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -19,6 +19,17 @@ class CreateSchoolClassessTable extends Migration
             $table->integer('resturant_id');
             $table->boolean('valid')->default(1);
         });
+        $resturants = [
+            'TE4',
+            'TE16',
+        ];
+        foreach($resturants as $val) {
+            DB::table('schoolclasses')->insert([
+                'name' => $val,
+                'resturant_id' => '1'
+                ]
+            );
+        }
     }
 
     /**
@@ -28,6 +39,6 @@ class CreateSchoolClassessTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('schoolclassess');
+        Schema::dropIfExists('schoolclasses');
     }
 }
