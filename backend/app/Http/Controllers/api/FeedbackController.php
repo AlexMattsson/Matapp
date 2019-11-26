@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\SchoolClasses;
 use Illuminate\Http\Request;
 
 class FeedbackController extends Controller
@@ -18,7 +19,8 @@ class FeedbackController extends Controller
     {
         
         $validated = $this->validateRequest($request);
-        
+        $resturant = SchoolClasses::find($validated->class)->resturant;
+        // Feedback::create()
     }
 
     private function validateRequest(Request $request)
