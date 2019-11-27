@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ExternalKeyMiddleware
 {
@@ -13,11 +15,12 @@ class ExternalKeyMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
-        $request->validate([
+        $validated = Validator::make($request->all(),[
             'access_key' => 'bail|required|exists:accesskeys'
         ]);
-        return $next($request);
+        return count($validated->errors()) > 0 ? 
+            $validated->errors() : $next($request);
     }
 }

@@ -15,9 +15,13 @@ class CreateAccesskeysTable extends Migration
     {
         Schema::create('accesskeys', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('access_key');
+            $table->string('access_key', 64);
             $table->timestamps();
         });
+        DB::table('accesskeys')->insert([
+            'access_key' => 'OXZHmKDD1lpdW2A89BtT81ZirL1OFZDeLYChPm1YjYNpzT7acMi3oHgPkl5cShDs'
+            ]
+        );
     }
 
     /**
