@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\SchoolClasses;
+use App\Feedback;
 use Illuminate\Http\Request;
 
 class FeedbackController extends Controller
@@ -19,8 +20,22 @@ class FeedbackController extends Controller
     {
         
         $validated = $this->validateRequest($request);
-        $resturant = SchoolClasses::find($validated->class)->resturant;
-        // Feedback::create()
+        $resturant = SchoolClasses::find($validated['class'])->resturant;
+        // dd($resturant);
+        $feedback = Feedback::create([
+            'class_id' => $validated['class'],
+            'user_id' => $validated['user'],
+            'diet' => $validated['diet'],
+            'resturant' => $resturant['name'],
+            'staff_informed' => $validated['staff_informed'] ?? 0,
+            'rating' => $validated['rating'],
+            'cause' => $validated['cause'] ?? null,
+            'additional_feedback' => $validated['additional_feedback'] ?? null
+        ]);
+        return [
+            "text" => "Feedback has been successfully received",
+            "data" => $feedback,
+        ];
     }
 
     private function validateRequest(Request $request)
