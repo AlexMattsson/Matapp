@@ -36,9 +36,9 @@ class _DropdownWidgetState extends State<DropdownWidget> {
         });
     }
 
-    static String currentValue;
+     String currentValue;
 
-    static String currentValueNamed;
+     String currentValueNamed;
 
     //Setting all items from class list
     List<DropdownMenuItem<String>> getMenuItems() {
@@ -59,9 +59,8 @@ class _DropdownWidgetState extends State<DropdownWidget> {
     //Updating Values
     updateValues(value) {
         currentValue = value;
+        currentValueNamed = widget.classes[int.parse(value) - 1];
         PersistentStorage.set(widget.storageKey, value);
-        currentValueNamed = widget.classes[int.parse(currentValue) - 1];
-        print("Value: $value, Current Value: $currentValue, Named: $currentValueNamed");
     }
 
     Color getBGColor() {
