@@ -1,4 +1,6 @@
 import 'package:app/Utilities/PersistentStorage.dart';
+import 'package:app/Utilities/httpRequests.dart';
+import 'package:app/Widgets/customTextWidget.dart';
 import 'package:app/Widgets/reasonFieldWidget.dart';
 import 'package:app/Widgets/buttonWidget.dart';
 import 'package:app/Widgets/dropdownWidget.dart';
@@ -12,12 +14,13 @@ class Vote extends StatefulWidget {
 }
 
 class _VoteState extends State<Vote> {
-  bool _askedStaff = false;
-  Color _goodColor = Colors.green[800];
-  Color _okColor = Colors.green[400];
-  Color _dissatisfiedColor = Colors.red[400];
-  Color _badColor = Colors.red[900];
-  int _rating;
+  bool askedStaff = false;
+  Color oneColor = Colors.green[800];
+  Color twoColor = Colors.green[400];
+  Color threeColor = Colors.red[400];
+  Color fourColor = Colors.red[900];
+  Color notSelectedColor = Colors.grey[800];
+  int rating;
   String _reason;
   String _field;
 
@@ -27,7 +30,7 @@ class _VoteState extends State<Vote> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: new Text("Success"),
-          content: new Text("Du har nu skickat in din respons. Values: $_rating, $_askedStaff, $_reason, $_field"),
+          content: new Text("Du har nu skickat in din respons. Values: $rating, $askedStaff, $_reason, $_field"),
           actions: <Widget>[
             new FlatButton(
               child: new Text("Close"),
@@ -40,6 +43,36 @@ class _VoteState extends State<Vote> {
       },
     );
   }
+
+  updateColors() {
+      switch(rating){
+        case 1:
+          oneColor = Colors.green[800];
+          twoColor = notSelectedColor;
+          threeColor = notSelectedColor;
+          fourColor = notSelectedColor;
+          break;
+        case 2:
+          oneColor = notSelectedColor;
+          twoColor = Colors.green[400];
+          threeColor = notSelectedColor;
+          fourColor = notSelectedColor;
+          break;
+        case 3:
+          oneColor = notSelectedColor;
+          twoColor = notSelectedColor;
+          threeColor = Colors.red[400];
+          fourColor = notSelectedColor;
+          break;
+        case 4:
+          oneColor = notSelectedColor;
+          twoColor = notSelectedColor;
+          threeColor = notSelectedColor;
+          fourColor = Colors.red[900];
+          break;
+      }
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -80,16 +113,11 @@ class _VoteState extends State<Vote> {
                     //Very happy dude
                     VoteIcon(
                       icon: Icons.sentiment_very_satisfied,
-                      color: _goodColor,
+                      color: oneColor,
                       onPressed: () {
                         setState(() {
-                          _rating = 3;
-                          _goodColor = Colors.black;
-                          if (_rating == 3) {
-                            _okColor = Colors.lime[700];
-                            _dissatisfiedColor = Colors.deepOrange[400];
-                            _badColor = Colors.red[800];
-                          }
+                          rating = 1;
+                          updateColors();
                         });
                       },
                     ),
@@ -98,17 +126,12 @@ class _VoteState extends State<Vote> {
                     ),
                     //Pretty happy dude
                     VoteIcon(
-                      icon: Icons.sentiment_dissatisfied,
-                      color: _okColor,
+                      icon: Icons.sentiment_satisfied,
+                      color: twoColor,
                       onPressed: () {
                         setState(() {
-                          _rating = 2;
-                          _okColor = Colors.black;
-                          if (_rating == 2) {
-                            _goodColor = Colors.green[700];
-                            _dissatisfiedColor = Colors.deepOrange[400];
-                            _badColor = Colors.red[800];
-                          }
+                          rating = 2;
+                          updateColors();
                         });
                       },
                     ),
@@ -118,16 +141,11 @@ class _VoteState extends State<Vote> {
                     //Little sad dude
                     VoteIcon(
                       icon: Icons.sentiment_dissatisfied,
-                      color: _dissatisfiedColor,
+                      color: threeColor,
                       onPressed: () {
                         setState(() {
-                          _rating = 1;
-                          _dissatisfiedColor = Colors.black;
-                          if (_rating == 1) {
-                            _goodColor = Colors.green[700];
-                            _okColor = Colors.lime[700];
-                            _badColor = Colors.red[800];
-                          }
+                          rating = 3;
+                          updateColors();
                         });
                       },
                     ),
@@ -137,16 +155,11 @@ class _VoteState extends State<Vote> {
                     //Very sad dude.
                     VoteIcon(
                       icon: Icons.sentiment_very_dissatisfied,
-                      color: _badColor,
+                      color: fourColor,
                       onPressed: () {
                         setState(() {
-                          _rating = 0;
-                          _badColor = Colors.black;
-                          if (_rating == 0) {
-                            _goodColor = Colors.green[700];
-                            _okColor = Colors.lime[700];
-                            _dissatisfiedColor = Colors.deepOrange[400];
-                          }
+                          rating = 4;
+                          updateColors();
                         });
                       },
                     ),
@@ -155,25 +168,23 @@ class _VoteState extends State<Vote> {
 
                 Row(
                   children: <Widget>[
-                    Text(
-                      "Informerat personal?",
-                      style: TextStyle(fontSize: 24, color: Colors.grey[800]),
+                    CustomText(
+                      text: "Informerat personal?",
                     ),
                     Checkbox(
                       onChanged: (bool resp) {
                         setState(() {
-                          _askedStaff = resp;
+                          askedStaff = resp;
                         });
                       },
-                      value: _askedStaff,
+                      value: askedStaff,
                     ),
                   ],
                 ),
                 Row(
                   children: <Widget>[
-                    Text(
-                      "Anledning",
-                      style: TextStyle(fontSize: 24, color: Colors.grey[800]),
+                    CustomText(
+                      text: "Anledning",
                     ),
                     SizedBox(
                       width: 10,
@@ -193,7 +204,8 @@ class _VoteState extends State<Vote> {
                       String field = await PersistentStorage.get("reasonField");
                       _reason = reason;
                       _field = field;
-                      if(_rating != null){
+                      if(rating != null){
+                        HttpRequests.getClasses();
                         _showDialog();
                       } else {
                         debugPrint("You have to give a rating");

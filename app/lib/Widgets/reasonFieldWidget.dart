@@ -9,7 +9,7 @@ class ReasonFieldWidget extends StatefulWidget {
 }
 
 class ReasonFieldState extends State<ReasonFieldWidget> {
-    String _fieldReasonValue;
+    String fieldReasonValue;
     TextEditingController _controller = TextEditingController();
 
 
@@ -19,14 +19,19 @@ class ReasonFieldState extends State<ReasonFieldWidget> {
             width: 200,
             child: TextFormField(
                 controller: _controller,
-                decoration: const InputDecoration(
-                    labelText: 'Ytterligare anledningar:',
+                decoration: InputDecoration(
+                    labelText: "Extra response:",
+                    labelStyle: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey,
+                        letterSpacing: 1.0,
+                    ),
                 ),
                 onChanged: (String newValue) {
                     setState(() {
-                        _fieldReasonValue = newValue;
+                        fieldReasonValue = newValue;
                         // Call the storage update
-                        PersistentStorage.set('reasonField', _fieldReasonValue);
+                        PersistentStorage.set('reasonField', fieldReasonValue);
                     });
                 },
             ),
