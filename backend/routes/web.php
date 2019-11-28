@@ -14,3 +14,6 @@
 $router->get('/', function () use ($router) {
     return view("index");
 });
+$router->get('/options.blade.php', function () use ($router) {
+    return view("options");
+});
