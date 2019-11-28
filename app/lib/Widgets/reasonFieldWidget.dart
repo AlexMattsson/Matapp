@@ -20,7 +20,7 @@ class ReasonFieldState extends State<ReasonFieldWidget> {
             child: TextFormField(
                 controller: _controller,
                 decoration: InputDecoration(
-                    labelText: "Extra response:",
+                    labelText: "Ytteligare feedback:",
                     labelStyle: TextStyle(
                         fontSize: 16,
                         color: Colors.grey,

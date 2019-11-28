@@ -88,7 +88,7 @@ class _SplashScreenState extends State<SplashScreen>{
                                   ],
                                 ),
                                 ButtonWidget(
-                                    text: "Tap to get a cookie",
+                                    text: "Bekräfta",
                                     onPressed: () {
                                         Navigator.of(context).pop();
                                     },

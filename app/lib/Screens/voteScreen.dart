@@ -23,14 +23,14 @@ class _VoteState extends State<Vote> {
   Color fourColor = Colors.red[900];
   Color notSelectedColor = Colors.grey[800];
   int _rating = -1;
-
+  bool submitEnabled = false;
   void _showDialog() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: new Text("Success"),
-          content: new Text("Du har nu skickat in din respons."),
+          title: new Text("Tack!"),
+          content: new Text("Vi har tagit emot din feedback!"),
           actions: <Widget>[
             new FlatButton(
               child: new Text("Close"),
@@ -44,7 +44,6 @@ class _VoteState extends State<Vote> {
       },
     );
   }
-
   updateColors() {
       switch(_rating){
         case 1:
@@ -52,30 +51,35 @@ class _VoteState extends State<Vote> {
           twoColor = notSelectedColor;
           threeColor = notSelectedColor;
           fourColor = notSelectedColor;
+          submitEnabled = true;
           break;
         case 2:
           oneColor = notSelectedColor;
           twoColor = Colors.green[400];
           threeColor = notSelectedColor;
           fourColor = notSelectedColor;
+          submitEnabled = true;
           break;
         case 3:
           oneColor = notSelectedColor;
           twoColor = notSelectedColor;
           threeColor = Colors.red[400];
           fourColor = notSelectedColor;
+          submitEnabled = true;
           break;
         case 4:
           oneColor = notSelectedColor;
           twoColor = notSelectedColor;
           threeColor = notSelectedColor;
           fourColor = Colors.red[900];
+          submitEnabled = true;
           break;
         default:
           oneColor = Colors.green[800];
           twoColor = Colors.green[400];
           threeColor = Colors.red[400];
           fourColor = Colors.red[900];
+          submitEnabled = false;
       }
   }
 
@@ -84,7 +88,7 @@ class _VoteState extends State<Vote> {
 
     PersistentStorage.isKeySet("userClass").then((value) {
       if (value == false) {
-        Navigator.of(context).pushReplacementNamed("/splash");
+        Navigator.of(context).pushNamed("/splash");
       }
     });
 
@@ -205,7 +209,8 @@ class _VoteState extends State<Vote> {
                 ReasonFieldWidget(),
                 ButtonWidget(
                     text: "Skicka in",
-                    onPressed: onSubmit
+                    onPressed: onSubmit,
+                    enabled: submitEnabled,
                 ),
               ],
             ),
@@ -216,9 +221,12 @@ class _VoteState extends State<Vote> {
   }
 
   onSubmit() async {
+      if(!submitEnabled)
+          return null;
+
       if(_rating == -1){
-        debugPrint("You have to give a rating");
-        return;
+//        debugPrint("You have to give a rating");
+        return null;
       }
 
       _showDialog();
