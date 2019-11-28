@@ -1,3 +1,4 @@
+import 'package:app/Utilities/dataStorage.dart';
 import 'package:app/Utilities/nti_logo_icons.dart';
 import 'package:app/Widgets/buttonWidget.dart';
 import 'package:app/Widgets/dropdownWidget.dart';
@@ -80,7 +81,7 @@ class _SplashScreenState extends State<SplashScreen>{
                                       ),
                                       SizedBox(width: 10,),
                                       new DropdownWidget(
-                                          classes: ["Vegetarian", "Vegan", "No Fish", "Only pizza"],
+                                          classes: DataStorage.dietDropdownItems,
                                           storageKey: "eatingHabit",
                                           lightTheme: false,
                                       ),

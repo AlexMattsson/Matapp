@@ -1,3 +1,4 @@
+import 'package:app/Utilities/dataStorage.dart';
 import 'package:app/Utilities/httpRequests.dart';
 import 'package:app/Widgets/customTextWidget.dart';
 import 'package:app/Widgets/dropdownWidget.dart';
@@ -70,7 +71,7 @@ class _SettingsState extends State<Settings> {
                                         children: <Widget>[
                                             Text("Kost "),
                                             DropdownWidget(
-                                                classes: ["Vegetarian", "Vegan", "No Fish", "Only pizza"],
+                                                classes: DataStorage.dietDropdownItems,
                                                 storageKey: "eatingHabit",
                                                 lightTheme: true,
                                             ),

@@ -1,4 +1,5 @@
 import 'package:app/Utilities/PersistentStorage.dart';
+import 'package:app/Utilities/dataStorage.dart';
 import 'package:app/Utilities/httpRequests.dart';
 import 'package:app/Widgets/customTextWidget.dart';
 import 'package:app/Widgets/reasonFieldWidget.dart';
@@ -21,9 +22,7 @@ class _VoteState extends State<Vote> {
   Color threeColor = Colors.red[400];
   Color fourColor = Colors.red[900];
   Color notSelectedColor = Colors.grey[800];
-  int rating;
-  String _reason;
-  String _field;
+  int _rating = -1;
 
   void _showDialog() {
     showDialog(
@@ -31,12 +30,13 @@ class _VoteState extends State<Vote> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: new Text("Success"),
-          content: new Text("Du har nu skickat in din respons. Values: $rating, $staffInformed, $_reason, $_field"),
+          content: new Text("Du har nu skickat in din respons."),
           actions: <Widget>[
             new FlatButton(
               child: new Text("Close"),
               onPressed: () {
                 Navigator.of(context).pop();
+                setState(() {});
               },
             ),
           ],
@@ -46,7 +46,7 @@ class _VoteState extends State<Vote> {
   }
 
   updateColors() {
-      switch(rating){
+      switch(_rating){
         case 1:
           oneColor = Colors.green[800];
           twoColor = notSelectedColor;
@@ -71,6 +71,11 @@ class _VoteState extends State<Vote> {
           threeColor = notSelectedColor;
           fourColor = Colors.red[900];
           break;
+        default:
+          oneColor = Colors.green[800];
+          twoColor = Colors.green[400];
+          threeColor = Colors.red[400];
+          fourColor = Colors.red[900];
       }
   }
 
@@ -117,7 +122,7 @@ class _VoteState extends State<Vote> {
                       color: oneColor,
                       onPressed: () {
                         setState(() {
-                          rating = 1;
+                          _rating = 1;
                           updateColors();
                         });
                       },
@@ -131,7 +136,7 @@ class _VoteState extends State<Vote> {
                       color: twoColor,
                       onPressed: () {
                         setState(() {
-                          rating = 2;
+                          _rating = 2;
                           updateColors();
                         });
                       },
@@ -145,7 +150,7 @@ class _VoteState extends State<Vote> {
                       color: threeColor,
                       onPressed: () {
                         setState(() {
-                          rating = 3;
+                          _rating = 3;
                           updateColors();
                         });
                       },
@@ -159,7 +164,7 @@ class _VoteState extends State<Vote> {
                       color: fourColor,
                       onPressed: () {
                         setState(() {
-                          rating = 4;
+                          _rating = 4;
                           updateColors();
                         });
                       },
@@ -191,7 +196,7 @@ class _VoteState extends State<Vote> {
                       width: 10,
                     ),
                     DropdownWidget(
-                      classes: ["Kall mat", "Lång Kö", "Ihåliga Nuggets", "Ogillade Maten", "Annat"],
+                      classes: DataStorage.reasonValues,
                       storageKey: "reasonValue",
                       lightTheme: true,
                     ),
@@ -211,30 +216,35 @@ class _VoteState extends State<Vote> {
   }
 
   onSubmit() async {
-      String reason = await PersistentStorage.get("reasonValue");
-      String field = await PersistentStorage.get("reasonField");
-      _reason = reason;
-      _field = field;
-      if(rating != null){
-          HttpRequest.getClasses();
-          _showDialog();
-      } else {
-          debugPrint("You have to give a rating");
+      if(_rating == -1){
+        debugPrint("You have to give a rating");
+        return;
       }
 
+      _showDialog();
       HttpRequest.sendFeedback(await getValues());
+      PersistentStorage.set("reasonValue", null);
+      PersistentStorage.set("reasonField", null);
+      staffInformed = false;
+      _rating = -1;
+      updateColors();
   }
 
   Future<Map<String, dynamic>> getValues() async {
+    String reasonIndex = await PersistentStorage.get("reasonValue");
+    String reason;
+    if (reasonIndex != null) {
+      reason = DataStorage.reasonValues[int.parse(reasonIndex)-1];
+    }
     return {
         'class': await PersistentStorage.get("userClass"),
-        'diet': await PersistentStorage.get("eatingHabit"),
+        'diet': DataStorage.dietDropdownItems[int.parse(await PersistentStorage.get("eatingHabit"))-1],
         'user': await UniqueIdentifier.serial,
 
         'staff_informed': staffInformed,
-        'rating': rating, // replace with actual value
-        'cause': await PersistentStorage.get("reasonValue"),
-        'additional_feedback': await PersistentStorage.get("reasonField"),
+        'rating': _rating, // replace with actual value
+        'cause': reason ?? '',
+        'additional_feedback': await PersistentStorage.get("reasonField") ?? '',
     };
   }
 }

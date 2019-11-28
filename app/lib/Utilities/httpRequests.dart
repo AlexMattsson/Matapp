@@ -20,7 +20,10 @@ class HttpRequest {
 
     static sendFeedback(Map<String, dynamic> data) async {
 
-        var response = await http.post("https://mbdev.umea-ntig.se/api/feedback/store", body: json.encode(data));
+
+        Map<String, String> headers = {"Content-type": "application/json"};
+
+        var response = await http.post("https://mbdev.umea-ntig.se/api/feedback/store", headers: headers, body: json.encode(data));
 
         int statusCode = response.statusCode;
 
