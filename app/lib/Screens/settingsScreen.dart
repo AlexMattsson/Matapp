@@ -13,7 +13,6 @@ class _SettingsState extends State<Settings> {
 
     static List<String> classes = ["bestClass", "placehonder", "placehonder", "placehonder"];
 
-
     @override
     initState() {
         super.initState();
