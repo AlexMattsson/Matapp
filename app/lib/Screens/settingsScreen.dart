@@ -12,7 +12,7 @@ class Settings extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
 
-    static List<String> classes = ["bestClass", "placehonder", "placehonder", "placehonder"];
+    static List<String> classes = ["placeholder", "placeholder", "placeholder", "placeholder"];
 
     @override
     initState() {

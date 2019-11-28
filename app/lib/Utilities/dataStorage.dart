@@ -1,6 +1,6 @@
 class DataStorage {
-    static List<String> reasonValues = ["Kall mat", "Lång Kö", "Ihåliga Nuggets", "Ogillade Maten", "Annat"];
+    static List<String> reasonValues = ["Kall mat", "Lång Kö", "Starkt kryddat", "Ogillade Maten", "Ihåliga Nuggets", "Annat"];
 
-    static List<String> dietDropdownItems = ["Vegetarian", "Vegan", "No Fish", "Only pizza"];
+    static List<String> dietDropdownItems = ["Vanlig kost","Vegetariskt", "Veganskt", "Specialkost"];
 
 }
