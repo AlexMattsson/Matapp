@@ -202,11 +202,16 @@ class _VoteState extends State<Vote> {
                     onPressed: () async {
                       String reason = await PersistentStorage.get("reasonValue");
                       String field = await PersistentStorage.get("reasonField");
+                      String classId = await PersistentStorage.get("userClass");
+                      String diet = await PersistentStorage.get("eatingHabit");
+                      String appId = "ALEX TEST APP";
                       _reason = reason;
                       _field = field;
                       if(rating != null){
-                        HttpRequests.getClasses();
                         _showDialog();
+                        String data = HttpRequests.formatData(int.parse(classId), appId, diet, rating, askedStaff, reason, field);
+                        print(data);
+                        HttpRequests.sendDataRequest(data);
                       } else {
                         debugPrint("You have to give a rating");
                       }

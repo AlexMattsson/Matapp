@@ -3,8 +3,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class HttpRequests {
-
-
     static Future<List<Classes>> getClasses() async {
         List<Classes> classes;
 
@@ -14,7 +12,6 @@ class HttpRequests {
             .map((data) => new Classes.fromJson(data))
             .toList();
 
-        print("test ${classes[0].className}");
 
         return classes;
     }
