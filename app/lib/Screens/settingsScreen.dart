@@ -19,7 +19,7 @@ class _SettingsState extends State<Settings> {
         super.initState();
 
         //Add stuff to the dropdown.
-        HttpRequests.getClasses().then((value) {
+        HttpRequest.getClasses().then((value) {
             setState(() {
                 classes.clear();
                 for (int i = 0; i < value.length; i++) {

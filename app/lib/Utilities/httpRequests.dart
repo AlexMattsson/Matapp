@@ -2,8 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-class HttpRequests {
-
+class HttpRequest {
 
     static Future<List<Classes>> getClasses() async {
         List<Classes> classes;
@@ -19,10 +18,9 @@ class HttpRequests {
         return classes;
     }
 
-    static sendDataRequest(String data) async {
-        //Map<String, String> headers = {"Content-type": "application/json"};
+    static sendFeedback(Map<String, dynamic> data) async {
 
-        var response = await http.post("https://mbdev.umea-ntig.se/api/feedback/store", body: data);
+        var response = await http.post("https://mbdev.umea-ntig.se/api/feedback/store", body: json.encode(data));
 
         int statusCode = response.statusCode;
 
@@ -30,19 +28,6 @@ class HttpRequests {
 
         print ("Code: $statusCode, Body: $body");
 
-    }
-
-    static String formatData(int classId, String userId, String diet, int rating,
-        [bool staffInformed, String cause, String extraFeedback]) {
-        String json =
-            '{"class": "$classId",'
-            ' "user": "$userId",'
-            ' "diet": "$diet",'
-            ' "rating": "$rating",'
-            ' "staff_informed": "$staffInformed",'
-            ' "cause": "$cause",'
-            ' "additional_feedback": "$extraFeedback"}';
-        return json;
     }
 }
 

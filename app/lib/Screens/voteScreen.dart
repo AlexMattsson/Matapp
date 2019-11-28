@@ -6,6 +6,7 @@ import 'package:app/Widgets/buttonWidget.dart';
 import 'package:app/Widgets/dropdownWidget.dart';
 import 'package:app/Widgets/voteIcon.dart';
 import 'package:flutter/material.dart';
+import 'package:unique_identifier/unique_identifier.dart';
 
 
 class Vote extends StatefulWidget {
@@ -14,7 +15,7 @@ class Vote extends StatefulWidget {
 }
 
 class _VoteState extends State<Vote> {
-  bool askedStaff = false;
+  bool staffInformed = false;
   Color oneColor = Colors.green[800];
   Color twoColor = Colors.green[400];
   Color threeColor = Colors.red[400];
@@ -30,7 +31,7 @@ class _VoteState extends State<Vote> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: new Text("Success"),
-          content: new Text("Du har nu skickat in din respons. Values: $rating, $askedStaff, $_reason, $_field"),
+          content: new Text("Du har nu skickat in din respons. Values: $rating, $staffInformed, $_reason, $_field"),
           actions: <Widget>[
             new FlatButton(
               child: new Text("Close"),
@@ -174,10 +175,10 @@ class _VoteState extends State<Vote> {
                     Checkbox(
                       onChanged: (bool resp) {
                         setState(() {
-                          askedStaff = resp;
+                          staffInformed = resp;
                         });
                       },
-                      value: askedStaff,
+                      value: staffInformed,
                     ),
                   ],
                 ),
@@ -199,18 +200,7 @@ class _VoteState extends State<Vote> {
                 ReasonFieldWidget(),
                 ButtonWidget(
                     text: "Skicka in",
-                    onPressed: () async {
-                      String reason = await PersistentStorage.get("reasonValue");
-                      String field = await PersistentStorage.get("reasonField");
-                      _reason = reason;
-                      _field = field;
-                      if(rating != null){
-                        HttpRequests.getClasses();
-                        _showDialog();
-                      } else {
-                        debugPrint("You have to give a rating");
-                      }
-                    }
+                    onPressed: onSubmit
                 ),
               ],
             ),
@@ -218,5 +208,33 @@ class _VoteState extends State<Vote> {
         ),
       ),
     );
+  }
+
+  onSubmit() async {
+      String reason = await PersistentStorage.get("reasonValue");
+      String field = await PersistentStorage.get("reasonField");
+      _reason = reason;
+      _field = field;
+      if(rating != null){
+          HttpRequest.getClasses();
+          _showDialog();
+      } else {
+          debugPrint("You have to give a rating");
+      }
+
+      HttpRequest.sendFeedback(await getValues());
+  }
+
+  Future<Map<String, dynamic>> getValues() async {
+    return {
+        'class': await PersistentStorage.get("userClass"),
+        'diet': await PersistentStorage.get("eatingHabit"),
+        'user': await UniqueIdentifier.serial,
+
+        'staff_informed': staffInformed,
+        'rating': rating, // replace with actual value
+        'cause': await PersistentStorage.get("reasonValue"),
+        'additional_feedback': await PersistentStorage.get("reasonField"),
+    };
   }
 }
