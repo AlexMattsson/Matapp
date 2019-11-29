@@ -83,7 +83,7 @@ class _DropdownWidgetState extends State<DropdownWidget> {
                     child: DropdownButton<String>(
                         value: currentValue,
                         icon: Icon(
-                            Icons.arrow_downward,
+                            Icons.arrow_drop_down,
                             color: getTextColor(),
                         ),
                         style: TextStyle(
