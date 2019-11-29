@@ -1,5 +1,6 @@
 import 'package:app/Utilities/dataStorage.dart';
 import 'package:app/Utilities/nti_logo_icons.dart';
+import 'package:app/Utilities/persistentStorage.dart';
 import 'package:app/Widgets/buttonWidget.dart';
 import 'package:app/Widgets/dropdownWidget.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,14 @@ class SplashScreen extends StatefulWidget{
 }
 
 class _SplashScreenState extends State<SplashScreen>{
-
+    static bool confirmEnabled = false;
+    static canConfirm(String s) async {
+        if(await PersistentStorage.isKeySet("userClass") &&
+            await PersistentStorage.isKeySet("eatingHabit")
+        ) {
+            _SplashScreenState.confirmEnabled = true;
+        }
+    }
     @override
     Widget build(BuildContext context) {
 
@@ -66,6 +74,7 @@ class _SplashScreenState extends State<SplashScreen>{
                                             classes: ["TE15", "TE16", "TE17", "TE18", "TE19"],
                                             storageKey: "userClass",
                                             lightTheme: false,
+                                            onChanged: canConfirm,
                                         ),
                                    ],
                                 ),
@@ -84,14 +93,19 @@ class _SplashScreenState extends State<SplashScreen>{
                                           classes: DataStorage.dietDropdownItems,
                                           storageKey: "eatingHabit",
                                           lightTheme: false,
+                                          onChanged: canConfirm,
                                       ),
                                   ],
                                 ),
                                 ButtonWidget(
                                     text: "Bekräfta",
                                     onPressed: () {
+                                        if(!confirmEnabled)
+                                            return null;
                                         Navigator.of(context).pop();
+                                        PersistentStorage.set("firstStart", "1");
                                     },
+                                    enabled: confirmEnabled,
                                 ),
                             ],
                         ),

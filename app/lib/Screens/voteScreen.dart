@@ -24,6 +24,18 @@ class _VoteState extends State<Vote> {
   Color notSelectedColor = Colors.grey[800];
   int _rating = -1;
   bool submitEnabled = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    PersistentStorage.isKeySet("firstStart").then((value) {
+        if (value == false) {
+            Navigator.of(context).pushNamed("/splash");
+        }
+    });
+  }
+
   void _showDialog() {
     showDialog(
       context: context,
@@ -44,6 +56,7 @@ class _VoteState extends State<Vote> {
       },
     );
   }
+
   updateColors() {
       switch(_rating){
         case 1:
@@ -85,13 +98,6 @@ class _VoteState extends State<Vote> {
 
   @override
   Widget build(BuildContext context) {
-
-    PersistentStorage.isKeySet("userClass").then((value) {
-      if (value == false) {
-        Navigator.of(context).pushNamed("/splash");
-      }
-    });
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.indigo[800],

@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 class DropdownWidget extends StatefulWidget {
     final List<String> classes;
     final bool lightTheme;
+    final Function onChanged;
     final String storageKey;
     DropdownWidget({
         @required this.classes,
         @required this.storageKey,
         this.lightTheme = false,
+        this.onChanged,
 
     });
 
@@ -91,6 +93,9 @@ class _DropdownWidgetState extends State<DropdownWidget> {
                         onChanged: (String value) {
                             setState(() {
                                 updateValues(value);
+                                if(widget.onChanged != null) {
+                                    widget.onChanged(value);
+                                }
                             });
                         },
                         hint: Text(
