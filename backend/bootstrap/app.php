@@ -21,7 +21,7 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
-// $app->withFacades();
+$app->withFacades();
 
 $app->withEloquent();
 
@@ -61,9 +61,9 @@ $app->singleton(
 //     App\Http\Middleware\ExampleMiddleware::class
 // ]);
 
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+$app->routeMiddleware([
+    'access_key' => App\Http\Middleware\ExternalKeyMiddleware::class,
+]);
 
 /*
 |--------------------------------------------------------------------------
@@ -99,6 +99,7 @@ $app->router->group([
 $app->router->group([
     'namespace' => 'App\Http\Controllers',
     'prefix' => 'api',
+    'middleware' => 'access_key'
 ], function ($router) {
     require __DIR__.'/../routes/api.php';
 });
