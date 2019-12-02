@@ -4,11 +4,12 @@ class ButtonWidget extends StatefulWidget {
 
   final String text;
   final Function onPressed;
-
+  bool enabled = false;
 
   ButtonWidget({
     @required this.text,
     @required this.onPressed,
+    this.enabled = false,
   });
 
   @override
@@ -16,13 +17,18 @@ class ButtonWidget extends StatefulWidget {
 }
 
 class _ButtonWidgetState extends State<ButtonWidget> {
+
+    Color getButtonColor() {
+        return widget.enabled ? Colors.indigo[800] : Colors.indigo[200];
+    }
+
   @override
   Widget build(BuildContext context) {
     return FlatButton(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(5.0),
       ),
-      color: Colors.indigo[800],
+      color: getButtonColor(),
       padding: EdgeInsets.all(20),
       onPressed: widget.onPressed,
       child: Text(

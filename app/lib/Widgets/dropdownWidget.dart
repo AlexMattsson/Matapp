@@ -4,11 +4,14 @@ import 'package:flutter/material.dart';
 class DropdownWidget extends StatefulWidget {
     final List<String> classes;
     final bool lightTheme;
+    final Function onChanged;
     final String storageKey;
     DropdownWidget({
         @required this.classes,
         @required this.storageKey,
-        this.lightTheme = false
+        this.lightTheme = false,
+        this.onChanged,
+
     });
 
     @override
@@ -29,15 +32,15 @@ class _DropdownWidgetState extends State<DropdownWidget> {
                 });
             } else {
                 setState(() {
-                    currentValueNamed = "Välj klass";
+                    currentValueNamed = "Välj";
                 });
             }
         });
     }
 
-    static String currentValue;
+     String currentValue;
 
-    static String currentValueNamed;
+     String currentValueNamed;
 
     //Setting all items from class list
     List<DropdownMenuItem<String>> getMenuItems() {
@@ -58,7 +61,8 @@ class _DropdownWidgetState extends State<DropdownWidget> {
     //Updating Values
     updateValues(value) {
         currentValue = value;
-        currentValueNamed = widget.classes[int.parse(currentValue) - 1];
+        currentValueNamed = widget.classes[int.parse(value) - 1];
+        PersistentStorage.set(widget.storageKey, value);
     }
 
     Color getBGColor() {
@@ -79,7 +83,7 @@ class _DropdownWidgetState extends State<DropdownWidget> {
                     child: DropdownButton<String>(
                         value: currentValue,
                         icon: Icon(
-                            Icons.arrow_downward,
+                            Icons.arrow_drop_down,
                             color: getTextColor(),
                         ),
                         style: TextStyle(
@@ -89,8 +93,10 @@ class _DropdownWidgetState extends State<DropdownWidget> {
                         onChanged: (String value) {
                             setState(() {
                                 updateValues(value);
+                                if(widget.onChanged != null) {
+                                    widget.onChanged(value);
+                                }
                             });
-                            PersistentStorage.set(widget.storageKey, _DropdownWidgetState.currentValue);
                         },
                         hint: Text(
                             "$currentValueNamed",
