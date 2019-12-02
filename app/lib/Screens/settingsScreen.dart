@@ -1,4 +1,6 @@
-import 'package:app/Widgets/AccessKeyWidget.dart';
+import 'package:app/Utilities/dataStorage.dart';
+import 'package:app/Utilities/httpRequests.dart';
+import 'package:app/Widgets/customTextWidget.dart';
 import 'package:app/Widgets/dropdownWidget.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +11,26 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
+
+    static List<String> classes = ["placeholder", "placeholder", "placeholder", "placeholder"];
+
+    @override
+    initState() {
+        super.initState();
+
+        //Add stuff to the dropdown.
+        HttpRequest.getClasses().then((value) {
+            setState(() {
+                classes.clear();
+                for (int i = 0; i < value.length; i++) {
+                    classes.add(value[i].className);
+                }
+            });
+
+        });
+
+    }
+
     @override
     Widget build(BuildContext context) {
         return Scaffold(
@@ -37,9 +59,9 @@ class _SettingsState extends State<Settings> {
                                 children: <Widget>[
                                     Row(
                                         children: <Widget>[
-                                            Text("Klass "),
+                                            CustomText(text: "Klass",),
                                             DropdownWidget(
-                                                classes: ["TE15", "TE16", "TE17", "TE18", "TE19"],
+                                                classes: classes,
                                                 storageKey: "userClass",
                                                 lightTheme: true,
                                             ),
@@ -49,14 +71,12 @@ class _SettingsState extends State<Settings> {
                                         children: <Widget>[
                                             Text("Kost "),
                                             DropdownWidget(
-                                                classes: ["Vegetarian", "Vegan", "No Fish", "Only pizza"],
+                                                classes: DataStorage.dietDropdownItems,
                                                 storageKey: "eatingHabit",
                                                 lightTheme: true,
                                             ),
                                         ],
                                     ),
-
-                                    new AccessKeyWidget(),
                                 ]
                             ),
                         )
