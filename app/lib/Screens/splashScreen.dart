@@ -13,12 +13,14 @@ class SplashScreen extends StatefulWidget{
 
 class _SplashScreenState extends State<SplashScreen>{
     static bool confirmEnabled = false;
-    static canConfirm(String s) async {
-        if(await PersistentStorage.isKeySet("userClass") &&
+    canConfirm(String s) {
+        setState(() async {
+            if(await PersistentStorage.isKeySet("userClass") &&
             await PersistentStorage.isKeySet("eatingHabit")
-        ) {
+            ) {
             _SplashScreenState.confirmEnabled = true;
-        }
+            }
+        });
     }
     @override
     Widget build(BuildContext context) {
@@ -81,7 +83,7 @@ class _SplashScreenState extends State<SplashScreen>{
                                 Row(
                                   children: <Widget>[
                                       Text(
-                                          "Specialkost:",
+                                          "Kost:",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 16.0,
