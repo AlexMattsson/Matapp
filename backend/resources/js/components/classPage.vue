@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <div class="wrapper">
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th scope="col">id</th>
+                    <th scope="col" style="display:none;">id</th>
                     <th scope="col">Klass</th>
                     <th scope="col">Resturang</th>
                     <th scope="col"></th>
@@ -80,6 +80,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+    .wrapper {
+        padding: 25px;
+    }
 </style>

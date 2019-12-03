@@ -1,6 +1,6 @@
 <template>
     <tr>
-        <th scope="row">{{ data.id }}</th>
+        <th scope="row" style="display:none;">{{ data.id }}</th>
         <td>{{ data.name }}</td>
         <td>
         <input type="radio" :id="data.id + 'one'" :value="1" v-model="selected">
@@ -56,6 +56,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+    .remove {
+        color: red;
+        margin-left: 10px;
+    }
 </style>

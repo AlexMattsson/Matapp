@@ -3,7 +3,7 @@
         <h2>Lägg till en ny klass</h2>
         <div class="form-group">
             <label for="name">Klassnamn</label>
-            <input class="form-control" id="name" placeholder="TE4" maxlength="8">
+            <input class="form-control" id="name" placeholder="TE4" maxlength="8" v-model="name">
         </div>
         <div class="form-group">
             <input type="radio" id="addone" :value="1" v-model="selected">
@@ -19,15 +19,20 @@
 export default {
     data() {
         return {
-            'selected': 1,      
+            'selected': 1,
+            'name': undefined,  
         }
     },
     methods: {
-        onSubmit() {
-            this.$emit('close');
-            // axios.post('/class/', {
-
-            // });
+        async onSubmit() {
+            if(this.name) {
+                await axios.post('/class/create', {
+                    "name": this.name,
+                    "resturant_id": this.selected
+                });
+                this.$emit('close');
+            }
+            
 
         }
     }
