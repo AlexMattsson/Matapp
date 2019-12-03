@@ -68,13 +68,13 @@ export default {
                 height: "70%",
                 adaptive: true,
                 
-            },{
-                'before-close': this.modalBeforeClose
             });
-            // console.log("this happens");
+            
         },
         updateData() {
-            console.log('closes');
+            axios.get('/api/classes/get').then(res => {
+                this.data = res.data;
+            })
         }
     }
 }
