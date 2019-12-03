@@ -15,9 +15,3 @@
     </div>
     
 @endsection
-@section('scripts')
-    <script>
-        window.data = JSON.parse(`{!! $data ?? ''!!}`);
-    </script>
-    <script src="/js/index.js"></script>
-@endsection

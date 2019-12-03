@@ -14,7 +14,7 @@ class ClassController extends Controller
      */
     public function index()
     {
-        return view('class.index');
+        return view('class.index', ['data' => SchoolClasses::all()]);
     }
 
     /**
