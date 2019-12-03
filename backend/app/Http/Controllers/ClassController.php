@@ -16,7 +16,15 @@ class ClassController extends Controller
     {
         return view('class.index', ['data' => SchoolClasses::all()]);
     }
-
+    
+    
+    private function validateRequest(Request $request)
+    {
+        return $this->validate($request, [
+            'name' => 'required|string|max:8',
+            'resturant_id' => 'required|integer|exists:resturants,id',
+        ]);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -25,9 +33,12 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $this->validateRequest($request);
+        $data = SchoolClasses::create($validated);
+        return ['Successfully created new class', $data];
     }
 
+    
     /**
      * Update the specified resource in storage.
      *
@@ -37,12 +48,8 @@ class ClassController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $class = SchoolClasses::findOrFail($id);
-        if(!$class) {
-            return abort(404, 'Class not found.');
-        }
-        $class->update($request->all());
-        return $class;
+        SchoolClasses::findOrFail($id)->update($request->all());
+        return 'Class successfully updated.';
     }
 
     /**
@@ -53,11 +60,7 @@ class ClassController extends Controller
      */
     public function destroy($id)
     {
-        $class = SchoolClasses::findOrFail($id);
-        if(!$class) {
-            return abort(404, 'Class not found.');
-        }
-        $class->delete();
+        SchoolClasses::findOrFail($id)->delete();
         return 'Class successfully removed.';
     }
 }

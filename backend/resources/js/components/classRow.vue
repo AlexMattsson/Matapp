@@ -27,16 +27,15 @@ export default {
     },
     methods: {
         onRemove() {
-            console.log('this happens');
-            axios.delete('/class/' + this.data.id).then((res) => {
-                console.log(res);
+            axios.delete('/class/' + this.data.id + '/delete').then((res) => {
+                console.log(res.data);
             });
         },
         updateRow() {
-            axios.patch('/class/' + this.data.id,{
+            axios.patch('/class/' + this.data.id + '/update', {
               'resturant_id': this.selected,
             }).then((res) => {
-                console.log(res);
+                console.log(res.data);
             });
         }
     },
