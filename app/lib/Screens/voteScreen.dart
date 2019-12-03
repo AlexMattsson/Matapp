@@ -39,7 +39,6 @@ class _VoteState extends State<Vote> {
     }
 
     getDude(int rating) {
-        print("big test $rating");
         switch(rating) {
             case 1:
                 return Icons.sentiment_very_satisfied;
