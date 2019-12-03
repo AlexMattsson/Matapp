@@ -33,7 +33,7 @@ class ClassController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SchoolClasses $request)
+    public function store(Request $request)
     {
         //
     }
@@ -44,9 +44,10 @@ class ClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(SchoolClasses $id)
+    public function show($id)
     {
-        //
+        return SchoolClasses::findOrFail($id);
+        // dd($id);
     }
 
     /**
@@ -67,9 +68,14 @@ class ClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(SchoolClasses $request, $id)
+    public function update(Request $request, $id)
     {
-        //
+        $class = SchoolClasses::findOrFail($id);
+        if(!$class) {
+            return abort(404, 'Class missing');
+        }
+        $class->update($request->all());
+        return $class;
     }
 
     /**

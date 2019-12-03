@@ -26,6 +26,6 @@ $router->group([
         'as' => 'authors.show',
         'uses' => 'ClassController@show'
     ]);
-    $app->put('/{id:[\d]+}', 'ClassController@update');
+    $app->patch('/{id:[\d]+}', 'ClassController@update');
     $app->delete('/{id:[\d]+}', 'ClassController@destroy');
 });
