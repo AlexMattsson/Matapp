@@ -27,7 +27,10 @@ export default {
     },
     methods: {
         onRemove() {
-            console.log('test');
+            console.log('this happens');
+            axios.delete('/class/' + this.data.id).then((res) => {
+                console.log(res);
+            });
         },
         updateRow() {
             axios.patch('/class/' + this.data.id,{
