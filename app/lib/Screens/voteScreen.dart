@@ -39,6 +39,7 @@ class _VoteState extends State<Vote> {
     }
 
     getDude(int rating) {
+        print("big test $rating");
         switch(rating) {
             case 1:
                 return Icons.sentiment_very_satisfied;
@@ -279,21 +280,17 @@ class _VoteState extends State<Vote> {
     }
 
     onSubmit() async {
-        if(!submitEnabled)
-            return null;
-
-        if(_rating == -1){
-//        debugPrint("You have to give a rating");
+        if(!submitEnabled) {
             return null;
         }
 
         HttpRequest.sendFeedback(await getValues());
+        _showDialog();
         PersistentStorage.set("reasonValue", null);
         PersistentStorage.set("reasonField", null);
         staffInformed = false;
         _rating = -1;
         updateColors();
-        _showDialog();
     }
 
     Future<Map<String, dynamic>> getValues() async {
