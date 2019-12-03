@@ -86,4 +86,4 @@ class chartModel {
 let model = new chartModel(window.data);
 
 var chart2 = model.createChart('myChart2', 'Greek Grill');
-var chart2 = model.createChart('myChart', 'O\'learys');
+// var chart2 = model.createChart('myChart', 'O\'learys');

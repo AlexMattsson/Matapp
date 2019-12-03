@@ -16,6 +16,16 @@ $router->get('/', function () use ($router) {
     $feedback = Feedback::all();
     return view("index", ['data' => $feedback]);
 });
-$router->get('/options', function () use ($router) {
-    return view("options");
+
+$router->group([
+    'prefix' => '/class',
+], function (\Laravel\Lumen\Routing\Router $app) {
+    $app->get('/', 'ClassController@index');
+    $app->post('/', 'ClassController@store');
+    $app->get('/{id:[\d]+}', [
+        'as' => 'authors.show',
+        'uses' => 'ClassController@show'
+    ]);
+    $app->put('/{id:[\d]+}', 'ClassController@update');
+    $app->delete('/{id:[\d]+}', 'ClassController@destroy');
 });
