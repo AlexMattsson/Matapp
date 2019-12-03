@@ -10,24 +10,72 @@
                 </tr>
             </thead>
             <tbody>
-                <class-row v-for="index in data" :key="index.id" :data="index"></class-row>
+                <class-row v-for="index in data" 
+                    :key="index.id" 
+                    :data="index"
+                    @delete="deleteIndex"
+                ></class-row>
             </tbody>
         </table>
-        
+        <button type="button" class="btn btn-primary" @click.prevent="addClassModal()">Add class</button>
+
+        <modals-container @close="updateData"></modals-container>
     </div>
     
 </template>
 
 <script>
 import classRow from './classRow';
+import createClassForm from './createClassForm';
 
 export default {
     props: [
-        'data'
+        'payload'
     ],
-
+    data() {
+        return {
+            'data': null,
+        }
+    },
+    created() {
+        this.data = this.payload;
+    },
     components: {
-        classRow
+        classRow,
+        createClassForm
+    },
+    methods: {
+        deleteIndex(id) {
+            for (let i = 0; i < this.data.length; i++) {
+                if(this.data[i].id == id) {
+                    this.remove(this.data, this.data[i]);       
+                    break;
+                }
+            }
+        },
+        remove(array, element) {
+            const index = array.indexOf(element);
+
+            if (index !== -1) {
+                array.splice(index, 1);
+            }
+        },
+        addClassModal() {
+            this.$modal.show(createClassForm, {
+                draggable: false,
+                resizable: false,
+                width: "70%",
+                height: "70%",
+                adaptive: true,
+                
+            },{
+                'before-close': this.modalBeforeClose
+            });
+            // console.log("this happens");
+        },
+        updateData() {
+            console.log('closes');
+        }
     }
 }
 </script>

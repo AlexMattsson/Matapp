@@ -27,9 +27,13 @@ export default {
     },
     methods: {
         onRemove() {
-            axios.delete('/class/' + this.data.id + '/delete').then((res) => {
-                console.log(res.data);
-            });
+            let confirmDelete = confirm("Är du säker att du vill ta bort klassen " + this.data.name + "?");
+            if(confirmDelete) {
+                axios.delete('/class/' + this.data.id + '/delete').then((res) => {
+                    this.$emit('delete', this.data.id);
+                });
+            }
+            
         },
         updateRow() {
             axios.patch('/class/' + this.data.id + '/update', {
