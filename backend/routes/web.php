@@ -1,5 +1,6 @@
 <?php
 
+use App\Feedback;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -12,7 +13,8 @@
 */
 
 $router->get('/', function () use ($router) {
-    return view("index");
+    $feedback = Feedback::all();
+    return view("index", ['data' => $feedback]);
 });
 $router->get('/options.blade.php', function () use ($router) {
     return view("options");
