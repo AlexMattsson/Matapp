@@ -16,6 +16,6 @@ $router->get('/', function () use ($router) {
     $feedback = Feedback::all();
     return view("index", ['data' => $feedback]);
 });
-$router->get('/options.blade.php', function () use ($router) {
+$router->get('/options', function () use ($router) {
     return view("options");
 });
