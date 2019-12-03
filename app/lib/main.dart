@@ -5,6 +5,7 @@ import 'Screens/settingsScreen.dart';
 import 'Screens/splashScreen.dart';
 
 void main() async => runApp(MaterialApp(
+      debugShowCheckedModeBanner: false,
       initialRoute: "/",
       routes: {
         "/": (context) => Vote(),
