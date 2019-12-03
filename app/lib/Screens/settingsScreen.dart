@@ -1,5 +1,6 @@
 import 'package:app/Utilities/dataStorage.dart';
 import 'package:app/Utilities/httpRequests.dart';
+import 'package:app/Utilities/nti_logo_icons.dart';
 import 'package:app/Widgets/customTextWidget.dart';
 import 'package:app/Widgets/dropdownWidget.dart';
 import 'package:flutter/material.dart';
@@ -44,41 +45,45 @@ class _SettingsState extends State<Settings> {
                     },
                 ),
                 backgroundColor: Colors.indigo[800],
+
                 title: Text(
-                    "NTI MATAPP",
+                  "Inställningar",
+                    style: TextStyle(
+                        letterSpacing: 1.0
+                    ),
                 ),
             ),
             body: Container(
                 child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                        Padding(
-                            padding: const EdgeInsets.only(left: 50),
-                            child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                    Row(
-                                        children: <Widget>[
-                                            CustomText(text: "Klass",),
-                                            DropdownWidget(
-                                                classes: classes,
-                                                storageKey: "userClass",
-                                                lightTheme: true,
-                                            ),
-                                        ],
-                                    ),
-                                    Row(
-                                        children: <Widget>[
-                                            Text("Kost "),
-                                            DropdownWidget(
-                                                classes: DataStorage.dietDropdownItems,
-                                                storageKey: "eatingHabit",
-                                                lightTheme: true,
-                                            ),
-                                        ],
-                                    ),
-                                ]
-                            ),
+                        Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                                Row(
+                                    children: <Widget>[
+                                        CustomText(text: "Klass"),
+                                        SizedBox(width: 20.0,),
+                                        DropdownWidget(
+                                            classes: classes,
+                                            storageKey: "userClass",
+                                            lightTheme: true,
+                                        ),
+                                    ],
+                                ),
+                                Row(
+                                    children: <Widget>[
+                                        CustomText(text: "Kost"),
+                                        SizedBox(width: 20.0,),
+                                        DropdownWidget(
+                                            classes: DataStorage.dietDropdownItems,
+                                            storageKey: "eatingHabit",
+                                            lightTheme: true,
+                                        ),
+                                    ],
+                                ),
+                            ]
                         )
                     ],
                 ),
