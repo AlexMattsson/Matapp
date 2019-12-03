@@ -24,6 +24,7 @@ class _VoteState extends State<Vote> {
     Color fourColor = Colors.red[900];
     Color notSelectedColor = Colors.grey[800];
     int _rating = -1;
+    String _reason;
     bool submitEnabled = false;
 
     @override
@@ -54,20 +55,41 @@ class _VoteState extends State<Vote> {
         }
     }
 
-    void _showDialog() {
+    void _showDialog(){
+        String reason = "Ingen anledning";
+        if (_reason != null) {
+            reason = DataStorage.reasonValues[int.parse(_reason)-1];
+        }
+
         Icon icon = Icon(
             getDude(_rating),
-            size: 20.0,
+            size: 25.0,
         );
         showDialog(
             context: context,
             builder: (BuildContext context) {
                 return AlertDialog(
                     title: Text("Tack!"),
-                    content: Row(
+                    content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                            Text("Vi har tagit emot din feedback!\n"),
-                            icon,
+                            Text("Vi har tagit emot din feedback!"),
+                            SizedBox(height: 5.0),
+                            Row(
+                                children: <Widget>[
+                                    Text("Du röstade:"),
+                                    SizedBox(width: 5.0),
+                                    icon,
+                                ],
+                            ),
+                            SizedBox(height: 5.0),
+                            Row(
+                              children: <Widget>[
+                                  Text("Med anledningen: $reason"),
+
+                              ],
+                            ),
                         ],
                     ),
                     actions: <Widget>[
@@ -265,17 +287,18 @@ class _VoteState extends State<Vote> {
             return null;
         }
 
-        _showDialog();
         HttpRequest.sendFeedback(await getValues());
         PersistentStorage.set("reasonValue", null);
         PersistentStorage.set("reasonField", null);
         staffInformed = false;
         _rating = -1;
         updateColors();
+        _showDialog();
     }
 
     Future<Map<String, dynamic>> getValues() async {
         String reasonIndex = await PersistentStorage.get("reasonValue");
+        _reason  = reasonIndex;
         String reason;
         if (reasonIndex != null) {
             reason = DataStorage.reasonValues[int.parse(reasonIndex)-1];
