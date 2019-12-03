@@ -97,7 +97,6 @@ class _VoteState extends State<Vote> {
                             child: Text("Close"),
                             onPressed: () {
                                 Navigator.of(context).pop();
-                                setState(() {});
                             },
                         ),
                     ],
@@ -290,6 +289,7 @@ class _VoteState extends State<Vote> {
         staffInformed = false;
         _rating = -1;
         updateColors();
+        setState(() {});
     }
 
     Future<Map<String, dynamic>> getValues() async {
