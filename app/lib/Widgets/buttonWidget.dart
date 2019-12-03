@@ -26,7 +26,7 @@ class _ButtonWidgetState extends State<ButtonWidget> {
   Widget build(BuildContext context) {
     return FlatButton(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(5.0),
+        borderRadius: BorderRadius.circular(8.0),
       ),
       color: getButtonColor(),
       padding: EdgeInsets.all(20),
@@ -37,6 +37,7 @@ class _ButtonWidgetState extends State<ButtonWidget> {
           letterSpacing: 3.0,
           color: Colors.white,
           fontSize: 34.0,
+          fontWeight: FontWeight.bold
         ),
       ),
     );

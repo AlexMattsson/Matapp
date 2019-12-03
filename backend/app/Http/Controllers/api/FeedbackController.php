@@ -48,7 +48,7 @@ class FeedbackController extends Controller
             'staff_informed' => 'nullable|boolean',
             'rating' => 'required|integer|max:4',
             'cause' => 'nullable|string|max:20',
-            'additional_feedback' => 'nullable|string|max:128',
+            'additional_feedback' => 'nullable|string|max:32',
         ]);
     }
 }
