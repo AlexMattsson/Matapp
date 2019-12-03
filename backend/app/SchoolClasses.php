@@ -8,10 +8,10 @@ class SchoolClasses extends Model
 {
     protected $table = 'schoolclasses';
 
-    protected $hidden = [
-        'resturant_id',
-        'valid'
-    ];
+    // protected $hidden = [
+    //     'resturant_id',
+    //     'valid'
+    // ];
 
     public function resturant()
     {

@@ -9,9 +9,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <class-row></class-row>
-                        <class-row></class-row>
-                        <class-row></class-row>
+                        
+                        <class-row v-for="index in data" :key="index.id" :data="index"></class-row>
                         
                     </tbody>
                 </table>
