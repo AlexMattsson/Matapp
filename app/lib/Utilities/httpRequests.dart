@@ -13,8 +13,6 @@ class HttpRequest {
             .map((data) => new Classes.fromJson(data))
             .toList();
 
-        print("test ${classes[0].className}");
-
         return classes;
     }
 
