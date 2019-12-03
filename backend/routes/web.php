@@ -1,5 +1,6 @@
 <?php
 
+use App\Feedback;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -12,5 +13,15 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    $feedback = Feedback::all();
+    return view("index", ['data' => $feedback]);
+});
+// $router->post('/class/', 'ClassController@store');
+$router->group([
+    'prefix' => '/class',
+], function (\Laravel\Lumen\Routing\Router $app) {
+    $app->get('/', 'ClassController@index');
+    $app->patch('/{id:[\d]+}/update', 'ClassController@update');
+    $app->delete('/{id:[\d]+}/delete', 'ClassController@destroy');
+    $app->post('/create', 'ClassController@store');
 });

@@ -1,6 +1,8 @@
 <?php
 
 
-$router->get('/classes/get', 'api\ClassController@index');
+$router->get('/classes/get', 'api\ClassController');
 
-$router->post('/feedback/store', 'api\FeedbackController@store');
+$router->post('/feedback/store', 
+    ['middleware' => 'access_key'], 
+    'api\FeedbackController');

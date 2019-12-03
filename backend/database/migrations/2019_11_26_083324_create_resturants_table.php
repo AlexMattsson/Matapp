@@ -19,7 +19,7 @@ class CreateResturantsTable extends Migration
         });
         $resturants = [
             'Greek grill',
-            'O\'learys',
+            'Olearys',
         ];
         foreach($resturants as $val) {
             DB::table('resturants')->insert([

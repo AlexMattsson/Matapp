@@ -18,18 +18,8 @@ class CreateSchoolClassesTable extends Migration
             $table->string('name', 8);
             $table->integer('resturant_id');
             $table->boolean('valid')->default(1);
+            $table->timestamps();
         });
-        $resturants = [
-            'TE4',
-            'TE16',
-        ];
-        foreach($resturants as $val) {
-            DB::table('schoolclasses')->insert([
-                'name' => $val,
-                'resturant_id' => '1'
-                ]
-            );
-        }
     }
 
     /**

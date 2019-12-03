@@ -7,11 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class SchoolClasses extends Model
 {
     protected $table = 'schoolclasses';
-    
-    protected $hidden = [
+
+    protected $fillable = [
+        'name',
         'resturant_id',
-        'valid'
+        'valid',
     ];
+    // protected $hidden = [
+    //     'resturant_id',
+    //     'valid'
+    // ];
 
     public function resturant()
     {
