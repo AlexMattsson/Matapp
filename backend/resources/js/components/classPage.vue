@@ -17,7 +17,10 @@
                 ></class-row>
             </tbody>
         </table>
-        <button type="button" class="btn btn-primary" @click.prevent="addClassModal()">Add class</button>
+        <button 
+            type="button"
+            class="btn btn-primary" 
+            @click.prevent="addClassModal()">Lägg till klass</button>
 
         <modals-container @close="updateData"></modals-container>
     </div>
