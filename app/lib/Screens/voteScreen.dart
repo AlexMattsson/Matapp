@@ -57,11 +57,6 @@ class _VoteState extends State<Vote> {
     }
 
     void _showDialog(Map<String, dynamic> response){
-        print(response);
-
-        print(response['cause'].length);
-
-
         Icon icon = Icon(
             getRatingIcon(rating),
             size: 25.0,
@@ -126,7 +121,6 @@ class _VoteState extends State<Vote> {
     }
 
     updateColors() {
-
         switch(rating){
             case 1:
                 oneColor = Colors.green[800];
