@@ -36,12 +36,11 @@ class _DropdownWidgetState extends State<DropdownWidget> {
             });
         }
         setState(() {
-            currentValueNamed = "Välj";
+            currentValueNamed = '';
         });
     }
 
      String currentValue;
-
      String currentValueNamed;
 
     //Setting all items from class list
