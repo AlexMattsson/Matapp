@@ -21,13 +21,17 @@ class HttpRequest {
 
         Map<String, String> headers = {"Content-type": "application/json"};
 
-        var response = await http.post("https://mbdev.umea-ntig.se/api/feedback/store", headers: headers, body: json.encode(data));
+        print(data);
+        var response = await http.post(
+            "https://mbdev.umea-ntig.se/api/feedback/store?access_key=OXZHmKDD1lpdW2A89BtT81ZirL1OFZDeLYChPm1YjYNpzT7acMi3oHgPkl5cShDs",
+            headers: headers,
+            body: json.encode(data));
 
         int statusCode = response.statusCode;
 
         String body = response.body;
 
-//        print ("Code: $statusCode, Body: $body");
+        print ("Code: $statusCode, Body: $body");
         return response;
     }
 }

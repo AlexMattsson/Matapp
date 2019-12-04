@@ -101,7 +101,7 @@ class _VoteState extends State<Vote> {
                             Row(
                                 children: <Widget>[
                                     Visibility(
-                                        child: Text("Personalen är " + (response['staff_informed']  ? 'informerad!' : 'inte informerad!')),
+                                        child: Text("Personalen på " + response['resturant'] + " är " + (response['staff_informed']  ? '\ninformerad!' : '\ninte informerad!')),
                                   ),
                               ],
                             ),
