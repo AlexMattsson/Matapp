@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:app/Utilities/PersistentStorage.dart';
 import 'package:app/Utilities/dataStorage.dart';
 import 'package:app/Utilities/httpRequests.dart';
@@ -38,7 +40,7 @@ class _VoteState extends State<Vote> {
         });
     }
 
-    getDude(int rating) {
+    getRatingIcon(int rating) {
         switch(rating) {
             case 1:
                 return Icons.sentiment_very_satisfied;
@@ -55,14 +57,14 @@ class _VoteState extends State<Vote> {
         }
     }
 
-    void _showDialog(){
-        String reason = "Ingen anledning";
-        if (_reason != null) {
-            reason = DataStorage.reasonValues[int.parse(_reason)-1];
-        }
+    void _showDialog(Map<String, dynamic> response){
+        print(response);
+
+        print(response['cause'].length);
+
 
         Icon icon = Icon(
-            getDude(_rating),
+            getRatingIcon(_rating),
             size: 25.0,
         );
         showDialog(
@@ -78,16 +80,35 @@ class _VoteState extends State<Vote> {
                             SizedBox(height: 5.0),
                             Row(
                                 children: <Widget>[
-                                    Text("Du röstade:"),
+                                    Text("Du valde:"),
                                     SizedBox(width: 5.0),
                                     icon,
                                 ],
                             ),
                             SizedBox(height: 5.0),
                             Row(
-                              children: <Widget>[
-                                  Text("Med anledningen: $reason"),
-
+                                children: <Widget>[
+                                    Visibility(
+                                        child: Text("Av anledningen: " + response['cause']),
+                                        visible: response['cause'].length != 0,
+                                  ),
+                              ],
+                            ),
+                            SizedBox(height: 5.0),
+                            Row(
+                                children: <Widget>[
+                                    Visibility(
+                                        child: Text("Ytterligare feedback: " + response['additional_feedback']),
+                                        visible: response['additional_feedback'].length != 0,
+                                  ),
+                              ],
+                            ),
+                            SizedBox(height: 5.0),
+                            Row(
+                                children: <Widget>[
+                                    Visibility(
+                                        child: Text("Personalen är " + (response['staff_informed']  ? 'informerad!' : 'inte informerad!')),
+                                  ),
                               ],
                             ),
                         ],
@@ -258,7 +279,7 @@ class _VoteState extends State<Vote> {
                                         ),
                                         DropdownWidget(
                                             classes: DataStorage.reasonValues,
-                                            storageKey: "reasonValue",
+                                            storageKey: 'reasonValue',
                                             lightTheme: true,
                                         ),
                                     ],
@@ -281,9 +302,14 @@ class _VoteState extends State<Vote> {
         if(!submitEnabled) {
             return null;
         }
+        var response = await HttpRequest.sendFeedback(await getValues());
+        if(response.statusCode == 200) {
 
-        HttpRequest.sendFeedback(await getValues());
-        _showDialog();
+            _showDialog(jsonDecode(response.body)['data']);
+        } else if (response.statusCode == 429) {
+            print("Rate limit exceeded");
+            //TODO Implement rate limit response
+        }
         PersistentStorage.set("reasonValue", null);
         PersistentStorage.set("reasonField", null);
         staffInformed = false;
@@ -299,6 +325,8 @@ class _VoteState extends State<Vote> {
         if (reasonIndex != null) {
             reason = DataStorage.reasonValues[int.parse(reasonIndex)-1];
         }
+        print(reason);
+        print(_reason);
         return {
             'class': await PersistentStorage.get("userClass"),
             'diet': DataStorage.dietDropdownItems[int.parse(await PersistentStorage.get("eatingHabit"))-1],

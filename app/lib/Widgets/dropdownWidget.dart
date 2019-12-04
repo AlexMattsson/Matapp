@@ -23,18 +23,20 @@ class _DropdownWidgetState extends State<DropdownWidget> {
     @override
     initState() {
         super.initState();
-        PersistentStorage.isKeySet(widget.storageKey).then((set) {
-            if (set == true) {
-                PersistentStorage.get(widget.storageKey).then((value) {
-                    setState(() {
-                        updateValues(value);
+        if(widget.storageKey != null) {
+            PersistentStorage.isKeySet(widget.storageKey).then((set) {
+                if (set == true) {
+                    PersistentStorage.get(widget.storageKey).then((value) {
+                        setState(() {
+                            updateValues(value);
+                            return;
+                        });
                     });
-                });
-            } else {
-                setState(() {
-                    currentValueNamed = "Välj";
-                });
-            }
+                }
+            });
+        }
+        setState(() {
+            currentValueNamed = "Välj";
         });
     }
 
