@@ -20,7 +20,8 @@ class ExternalKeyMiddleware
         $validated = Validator::make($request->all(),[
             'access_key' => 'bail|required|exists:accesskeys'
         ]);
-        return count($validated->errors()) > 0 ? 
-            $validated->errors() : $next($request);
+        return abort(403, count($validated->errors()) > 0 ?
+            $validated->errors() : $next($request)
+        );
     }
 }
