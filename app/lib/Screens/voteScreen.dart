@@ -109,7 +109,7 @@ class _VoteState extends State<Vote> {
                     ),
                     actions: <Widget>[
                         new FlatButton(
-                            child: Text("Close"),
+                            child: Text("Stäng"),
                             onPressed: () {
                                 Navigator.of(context).pop();
                             },
