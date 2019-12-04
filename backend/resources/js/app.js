@@ -9,6 +9,8 @@ window.axios.defaults.headers.common = {
     'X-Requested-With': 'XMLHttpRequest'
 };
 
+import cause from './components/cause';
+Vue.component('cause', cause);
 import chart from './components/chart';
 Vue.component('chart', chart);
 import classPage from './components/classPage';
