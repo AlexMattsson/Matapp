@@ -27,12 +27,12 @@ class _DropdownWidgetState extends State<DropdownWidget> {
             PersistentStorage.isKeySet(widget.storageKey).then((set) {
                 if (set == true) {
                     PersistentStorage.get(widget.storageKey).then((value) {
+
                             print(value);
                             setState(() {
                                 updateValues(value);
                                 return;
                             });
-
                     });
                 }
             });

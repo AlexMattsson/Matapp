@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:app/Utilities/PersistentStorage.dart';
 import 'package:app/Utilities/dataStorage.dart';
 import 'package:app/Utilities/httpRequests.dart';
@@ -23,8 +25,7 @@ class _VoteState extends State<Vote> {
     Color threeColor = Colors.red[400];
     Color fourColor = Colors.red[900];
     Color notSelectedColor = Colors.grey[800];
-    int _rating = -1;
-    String _reason;
+    int rating = -1;
     bool submitEnabled = false;
 
     @override
@@ -38,7 +39,7 @@ class _VoteState extends State<Vote> {
         });
     }
 
-    getDude(int rating) {
+    getRatingIcon(int rating) {
         switch(rating) {
             case 1:
                 return Icons.sentiment_very_satisfied;
@@ -55,14 +56,9 @@ class _VoteState extends State<Vote> {
         }
     }
 
-    void _showDialog(){
-        String reason = "Ingen anledning";
-        if (_reason != null) {
-            reason = DataStorage.reasonValues[int.parse(_reason)-1];
-        }
-
+    void _showDialog(Map<String, dynamic> response){
         Icon icon = Icon(
-            getDude(_rating),
+            getRatingIcon(rating),
             size: 25.0,
         );
         showDialog(
@@ -78,23 +74,42 @@ class _VoteState extends State<Vote> {
                             SizedBox(height: 5.0),
                             Row(
                                 children: <Widget>[
-                                    Text("Du röstade:"),
+                                    Text("Du valde:"),
                                     SizedBox(width: 5.0),
                                     icon,
                                 ],
                             ),
                             SizedBox(height: 5.0),
                             Row(
-                              children: <Widget>[
-                                  Text("Med anledningen: $reason"),
-
+                                children: <Widget>[
+                                    Visibility(
+                                        child: Text("Av anledningen: " + response['cause']),
+                                        visible: response['cause'].length != 0,
+                                  ),
+                              ],
+                            ),
+                            SizedBox(height: 5.0),
+                            Row(
+                                children: <Widget>[
+                                    Visibility(
+                                        child: Text("Ytterligare feedback: " + response['additional_feedback']),
+                                        visible: response['additional_feedback'].length != 0,
+                                  ),
+                              ],
+                            ),
+                            SizedBox(height: 5.0),
+                            Row(
+                                children: <Widget>[
+                                    Visibility(
+                                        child: Text("Personalen på " + response['resturant'] + " är " + (response['staff_informed']  ? '\ninformerad!' : '\ninte informerad!')),
+                                  ),
                               ],
                             ),
                         ],
                     ),
                     actions: <Widget>[
                         new FlatButton(
-                            child: Text("Close"),
+                            child: Text("Stäng"),
                             onPressed: () {
                                 Navigator.of(context).pop();
                             },
@@ -106,7 +121,7 @@ class _VoteState extends State<Vote> {
     }
 
     updateColors() {
-        switch(_rating){
+        switch(rating){
             case 1:
                 oneColor = Colors.green[800];
                 twoColor = notSelectedColor;
@@ -183,7 +198,7 @@ class _VoteState extends State<Vote> {
                                             color: oneColor,
                                             onPressed: () {
                                                 setState(() {
-                                                    _rating = 1;
+                                                    rating = 1;
                                                     updateColors();
                                                 });
                                             },
@@ -197,7 +212,7 @@ class _VoteState extends State<Vote> {
                                             color: twoColor,
                                             onPressed: () {
                                                 setState(() {
-                                                    _rating = 2;
+                                                    rating = 2;
                                                     updateColors();
                                                 });
                                             },
@@ -211,7 +226,7 @@ class _VoteState extends State<Vote> {
                                             color: threeColor,
                                             onPressed: () {
                                                 setState(() {
-                                                    _rating = 3;
+                                                    rating = 3;
                                                     updateColors();
                                                 });
                                             },
@@ -225,51 +240,59 @@ class _VoteState extends State<Vote> {
                                             color: fourColor,
                                             onPressed: () {
                                                 setState(() {
-                                                    _rating = 4;
+                                                    rating = 4;
                                                     updateColors();
                                                 });
                                             },
                                         ),
                                     ],
                                 ),
-
-                                Row(
-                                    children: <Widget>[
-                                        CustomText(
-                                            text: "Informerat personal?",
-                                        ),
-                                        Checkbox(
-                                            onChanged: (bool resp) {
-                                                setState(() {
-                                                    staffInformed = resp;
-                                                });
-                                            },
-                                            value: staffInformed,
-                                        ),
-                                    ],
+                                Visibility(
+                                    child: Row(
+                                        children: <Widget>[
+                                            CustomText(
+                                                text: "Anledning",
+                                            ),
+                                            SizedBox(
+                                                width: 20,
+                                            ),
+                                            DropdownWidget(
+                                                classes: DataStorage.reasonValues,
+                                                storageKey: 'reasonValue',
+                                                lightTheme: true,
+                                            ),
+                                        ],
+                                    ),
+                                    visible: submitEnabled && rating > 2,
                                 ),
-                                Row(
-                                    children: <Widget>[
-                                        CustomText(
-                                            text: "Anledning",
-                                        ),
-                                        SizedBox(
-                                            width: 20,
-                                        ),
-                                        DropdownWidget(
-                                            classes: DataStorage.reasonValues,
-                                            storageKey: "reasonValue",
-                                            lightTheme: true,
-                                        ),
-                                    ],
+                                Visibility(
+                                    child: ReasonFieldWidget(),
+                                    visible: submitEnabled && rating > 2,
                                 ),
-                                ReasonFieldWidget(),
+                                Visibility(
+                                    child: Row(
+                                        children: <Widget>[
+                                            CustomText(
+                                                text: "Har du informerat personal?",
+                                            ),
+                                            Checkbox(
+                                                onChanged: (bool resp) {
+                                                    setState(() {
+                                                        staffInformed = resp;
+                                                    });
+                                                },
+                                                value: staffInformed,
+                                            ),
+                                        ],
+                                    ),
+                                    visible: submitEnabled,
+                                ),
                                 ButtonWidget(
                                     text: "Skicka in",
                                     onPressed: onSubmit,
                                     enabled: submitEnabled,
                                 ),
-                            ],
+                            ]
                         ),
                     ],
                 ),
@@ -281,20 +304,24 @@ class _VoteState extends State<Vote> {
         if(!submitEnabled) {
             return null;
         }
+        var response = await HttpRequest.sendFeedback(await getValues());
+        if(response.statusCode == 200) {
 
-        HttpRequest.sendFeedback(await getValues());
-        _showDialog();
+            _showDialog(jsonDecode(response.body)['data']);
+        } else if (response.statusCode == 429) {
+            print("Rate limit exceeded");
+            //TODO Implement rate limit response
+        }
         PersistentStorage.set("reasonValue", null);
         PersistentStorage.set("reasonField", null);
         staffInformed = false;
-        _rating = -1;
+        rating = -1;
         updateColors();
         setState(() {});
     }
 
     Future<Map<String, dynamic>> getValues() async {
         String reasonIndex = await PersistentStorage.get("reasonValue");
-        _reason  = reasonIndex;
         String reason;
         if (reasonIndex != null) {
             reason = DataStorage.reasonValues[int.parse(reasonIndex)-1];
@@ -305,7 +332,7 @@ class _VoteState extends State<Vote> {
             'user': await UniqueIdentifier.serial,
 
             'staff_informed': staffInformed,
-            'rating': _rating, // replace with actual value
+            'rating': rating, // replace with actual value
             'cause': reason ?? '',
             'additional_feedback': await PersistentStorage.get("reasonField") ?? '',
         };
