@@ -1,21 +1,3 @@
-<<<<<<< HEAD
-<?php
-
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It is a breeze. Simply tell Lumen the URIs it should respond to
-| and give it the Closure to call when that URI is requested.
-|
-*/
-
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
-=======
 <?php
 
 use App\Feedback;
@@ -43,4 +25,3 @@ $router->group([
     $app->delete('/{id:[\d]+}/delete', 'ClassController@destroy');
     $app->post('/create', 'ClassController@store');
 });
->>>>>>> 1c4ced3d95c0f7fbb12a988cce89ff4e3eba83d8
