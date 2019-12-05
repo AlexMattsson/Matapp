@@ -48,7 +48,7 @@ export default {
                     }
                 }
             });
-            this.list = _.sortBy( data, 'counter' ).reverse();
+            this.list = _.sortBy( data, 'counter' ).reverse().slice(0,4);
         }
     }
 }
