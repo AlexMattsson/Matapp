@@ -4,17 +4,10 @@
     <div class="col-md-12" id="app">
         <div class="row">
             <div class="col-md-6">
-                <p class="text-center" id="olearys">Olearys</p>
-                <chart :data='@json($data)' :resturant="'Olearys'" ></chart>
-                <calendar></calendar>
-                <comments :data='@json($data)' :resturant='"Olearys"'></comments>
+                <info-tree :data='@json($data)' :resturant='"Greek grill"'></info-tree>
             </div>
             <div class="col-md-6">
-                <p class="text-center" id="greek">Greek grill</p>
-                <chart :data='@json($data)' :resturant='"Greek grill"'></chart>
-                <calendar></calendar>
-                <comments :data='@json($data)' :resturant='"Greek grill"'></comments>
-                
+                <info-tree :data='@json($data)' :resturant='"Olearys"'></info-tree>
             </div>
         </div>
     </div>

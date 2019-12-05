@@ -8,12 +8,24 @@ window.axios.defaults.headers.common = {
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
     'X-Requested-With': 'XMLHttpRequest'
 };
-
-import chart from './components/chart';
-Vue.component('chart', chart);
+import infotree from './components/informationtree';
 import classPage from './components/classPage';
-Vue.component('class-page', classPage);
 import VModal from 'vue-js-modal';
+Vue.component('info-tree', infotree);
+Vue.component('class-page', classPage);
+import VCalendar from 'v-calendar';
+ 
+
+Vue.use(VCalendar, {
+  formats: {
+    title: 'MMMM YYYY',
+    weekdays: 'W',
+    navMonths: 'MMM',
+    input: ['L', 'YYYY-MM-DD', 'YYYY/MM/DD'],
+    dayPopover: 'L',
+  }
+});
+
 Vue.use(VModal, { dynamic: true, dynamicDefaults: { clickToClose: false } });
 
 new Vue({
