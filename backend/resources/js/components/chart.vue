@@ -16,8 +16,8 @@ export default {
             labels: ['Bra', 'Ok', 'Sådär', 'Dåligt'],
             datasets: [{
                 label: 'rating',
-                backgroundColor: ["#388E3C", "#AFB42B", "#FF7043", "#C62828"],
-                borderColor: ["#388E3C", "#AFB42B", "#FF7043", "#C62828"],
+                backgroundColor: ["#2E7D32", "#66BB6A", "#EF5350", "#B71C1C"],
+                borderColor: ["#2E7D32", "#66BB6A", "#EF5350", "#B71C1C"],
                 data: this.getRating(this.resturant),
             }]
         },{responsive: true
