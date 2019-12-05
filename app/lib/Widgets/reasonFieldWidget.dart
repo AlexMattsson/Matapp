@@ -29,7 +29,6 @@ class ReasonFieldState extends State<ReasonFieldWidget> {
     return Container(
       width: 200,
       child: TextFormField(
-        maxLength: 16,
         controller: _controller,
         decoration: const InputDecoration(
           labelText: 'Ytterligare anledningar:',
