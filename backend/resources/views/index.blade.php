@@ -6,10 +6,15 @@
             <div class="col-md-6">
                 <p class="text-center" id="olearys">Olearys</p>
                 <chart :data='@json($data)' :resturant="'Olearys'" ></chart>
+                <calendar></calendar>
+                <comments :data='@json($data)' :resturant='"Olearys"'></comments>
             </div>
             <div class="col-md-6">
                 <p class="text-center" id="greek">Greek grill</p>
-                <chart :data='@json($data)' :resturant='"Greek Grill"'></chart>
+                <chart :data='@json($data)' :resturant='"Greek grill"'></chart>
+                <calendar></calendar>
+                <comments :data='@json($data)' :resturant='"Greek grill"'></comments>
+                
             </div>
         </div>
     </div>
