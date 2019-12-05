@@ -1,4 +1,5 @@
 import 'package:app/Utilities/dataStorage.dart';
+import 'package:app/Utilities/httpRequests.dart';
 import 'package:app/Utilities/nti_logo_icons.dart';
 import 'package:app/Utilities/persistentStorage.dart';
 import 'package:app/Widgets/buttonWidget.dart';
@@ -11,6 +12,29 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+
+    static Map<int, String> classes = {1: "placeholder", 2: "placeholder", 3: "placeholder", 4: "placeholder",};
+
+    @override
+    initState() {
+        super.initState();
+
+        //Add stuff to the dropdown.
+        HttpRequest.getClasses().then((value) {
+            setState(() {
+                classes.clear();
+                for (int i = 0; i < value.length; i++) {
+                    classes.putIfAbsent(value[i].id, () => value[i].className);
+
+
+                }
+            });
+
+        });
+
+    }
+
+
     static bool confirmEnabled = false;
 
     canConfirm(String s) async {
@@ -74,7 +98,7 @@ class _SplashScreenState extends State<SplashScreen> {
                                             width: 10,
                                         ),
                                         DropdownWidget(
-                                            classes: ["TE15", "TE16", "TE17", "TE18", "TE19"],
+                                            classes: classes,
                                             storageKey: "userClass",
                                             lightTheme: false,
                                             onChanged: canConfirm,

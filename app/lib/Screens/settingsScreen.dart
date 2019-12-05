@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:app/Utilities/dataStorage.dart';
 import 'package:app/Utilities/httpRequests.dart';
 import 'package:app/Widgets/customTextWidget.dart';
@@ -12,7 +14,7 @@ class Settings extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
 
-    static List<String> classes = ["placeholder", "placeholder", "placeholder", "placeholder"];
+    static Map<int, String> classes = {1: "placeholder", 2: "placeholder", 3: "placeholder", 4: "placeholder",};
 
     @override
     initState() {
@@ -23,7 +25,9 @@ class _SettingsState extends State<Settings> {
             setState(() {
                 classes.clear();
                 for (int i = 0; i < value.length; i++) {
-                    classes.add(value[i].className);
+                    classes.putIfAbsent(value[i].id, () => value[i].className);
+
+
                 }
             });
 
