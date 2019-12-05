@@ -8,7 +8,7 @@ window.axios.defaults.headers.common = {
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
     'X-Requested-With': 'XMLHttpRequest'
 };
-import infotree from './components/informationtree';
+import infotree from './components/informationTree';
 import classPage from './components/classPage';
 import VModal from 'vue-js-modal';
 Vue.component('info-tree', infotree);
