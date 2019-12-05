@@ -2,7 +2,7 @@ import 'package:app/Utilities/PersistentStorage.dart';
 import 'package:flutter/material.dart';
 
 class DropdownWidget extends StatefulWidget {
-    final List<String> classes;
+    final Map<int, String> classes;
     final bool lightTheme;
     final Function onChanged;
     final String storageKey;
@@ -27,16 +27,18 @@ class _DropdownWidgetState extends State<DropdownWidget> {
             PersistentStorage.isKeySet(widget.storageKey).then((set) {
                 if (set == true) {
                     PersistentStorage.get(widget.storageKey).then((value) {
-                        setState(() {
-                            updateValues(value);
-                            return;
-                        });
+
+                            print(value);
+                            setState(() {
+                                updateValues(value);
+                                return;
+                            });
                     });
                 }
             });
         }
         setState(() {
-            currentValueNamed = '';
+            currentValueNamed = "";
         });
     }
 
@@ -49,9 +51,9 @@ class _DropdownWidgetState extends State<DropdownWidget> {
         DropdownMenuItem<String> item;
 
         for (int i = 0; i < widget.classes.length; i++) {
-            int value = i + 1;
+            int value = widget.classes.keys.toList()[i];
             item = DropdownMenuItem<String>(
-                child: Text(widget.classes[i]),
+                child: Text(widget.classes.values.toList()[i]),
                 value: "$value",
             );
             items.add(item);
