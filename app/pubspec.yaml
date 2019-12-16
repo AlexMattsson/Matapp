@@ -59,10 +59,11 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Roboto
+    - family: Dalton Maag
       fonts:
-        - asset: fonts/roboto/Roboto-Regular.ttf
-        - asset: fonts/roboto/Roboto-Bold.ttf
+        - asset: fonts/Dalton/Dalton Maag - Soleto.ttf
+        - asset: fonts/Dalton/Dalton Maag - Soleto Bold.ttf
+        - asset: fonts/Dalton/Dalton Maag - Soleto Italic.ttf
     - family:  NtiLogo
       fonts:
         - asset: fonts/NtiLogo.ttf

@@ -101,7 +101,7 @@ class _VoteState extends State<Vote> {
                             Row(
                                 children: <Widget>[
                                     Visibility(
-                                        child: Text("Personalen på " + response['resturant'] + " är " + (response['staff_informed']  ? '\ninformerad!' : '\ninte informerad!')),
+                                        child: Text("Personalen på din restaurang är " + (response['staff_informed']  ? '\ninformerad!' : '\ninte informerad!')),
                                   ),
                               ],
                             ),
@@ -188,7 +188,7 @@ class _VoteState extends State<Vote> {
                         Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
-                                CustomText(text: "Hur var skolmaten idag?", bigText: true,),
+                                CustomText(text: "Hur var maten idag?", bigText: true,),
                                 Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
