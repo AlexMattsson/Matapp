@@ -16,7 +16,6 @@ class CustomText extends StatelessWidget {
             fontSize: bigText ? 28 : 20,
             color: Colors.grey[800],
             letterSpacing: 1.0,
-            fontFamily: 'Dalton Maag',
         ),
     );
   }

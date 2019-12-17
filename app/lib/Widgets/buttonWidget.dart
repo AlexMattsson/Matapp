@@ -37,7 +37,6 @@ class _ButtonWidgetState extends State<ButtonWidget> {
         style: TextStyle(
           letterSpacing: 3.0,
           color: Colors.white,
-          fontFamily: 'Dalton Maag',
           fontSize: 34.0,
           fontWeight: FontWeight.bold
         ),
