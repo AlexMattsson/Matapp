@@ -25,7 +25,7 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.2
+  # cupertino_icons: ^0.1.2
 
 dev_dependencies:
   flutter_test:
@@ -59,11 +59,10 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Dalton Maag
+    - family: Dalton
       fonts:
-        - asset: fonts/Dalton/Dalton Maag - Soleto.ttf
-        - asset: fonts/Dalton/Dalton Maag - Soleto Bold.ttf
-        - asset: fonts/Dalton/Dalton Maag - Soleto Italic.ttf
+        - asset: fonts/Dalton/Dalton_Maag-Soleto.ttf
+        - asset: fonts/Dalton/Dalton_Maag
     - family:  NtiLogo
       fonts:
         - asset: fonts/NtiLogo.ttf
