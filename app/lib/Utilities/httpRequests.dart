@@ -7,12 +7,13 @@ class HttpRequest {
     static Future<List<Classes>> getClasses() async {
         List<Classes> classes;
 
-        var response = await http.get("https://mbdev.umea-ntig.se/api/classes/get");
-
+        var response = await http.get("https://mbdev.umea-ntig.se/api/classes/get?access_key=OXZHmKDD1lpdW2A89BtT81ZirL1OFZDeLYChPm1YjYNpzT7acMi3oHgPkl5cShDs");
+        print(response.body);
         classes = (json.decode(response.body) as List)
             .map((data) => new Classes.fromJson(data))
             .toList();
 
+        print("Big test $classes");
         return classes;
     }
 

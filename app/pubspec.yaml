@@ -62,8 +62,8 @@ flutter:
     - family: Dalton
       fonts:
         - asset: fonts/Dalton/Dalton_Maag-Soleto.ttf
-        - asset: fonts/Dalton/Dalton_Maag
-    - family:  NtiLogo
+        - asset: fonts/Dalton/Dalton_Maag-Soleto_Bold.ttf
+    - family: NtiLogo
       fonts:
         - asset: fonts/NtiLogo.ttf
 
