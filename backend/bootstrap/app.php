@@ -65,6 +65,10 @@ $app->routeMiddleware([
     'access_key' => App\Http\Middleware\ExternalKeyMiddleware::class,
 ]);
 
+$app->routeMiddleware([
+    'auth' => App\Http\Middleware\Authenticate::class,
+]);
+
 /*
 |--------------------------------------------------------------------------
 | Register Service Providers
@@ -77,8 +81,10 @@ $app->routeMiddleware([
 */
 
 // $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
-// $app->register(App\Providers\EventServiceProvider::class);
+$app->register(App\Providers\AuthServiceProvider::class);
+// $app->register(App\Providers\EventServiceProvider::class); 
+
+$app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------

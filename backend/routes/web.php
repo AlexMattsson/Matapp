@@ -12,11 +12,13 @@ use App\Feedback;
 |
 */
 
+//Index page route
 $router->get('/', function () use ($router) {
     $feedback = Feedback::all();
     return view("index", ['data' => $feedback]);
 });
-// $router->post('/class/', 'ClassController@store');
+
+//Edit class page route
 $router->group([
     'prefix' => '/class',
 ], function (\Laravel\Lumen\Routing\Router $app) {
