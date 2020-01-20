@@ -6,6 +6,7 @@ import 'Screens/splashScreen.dart';
 
 void main() async => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(fontFamily: 'Dalton'),
       initialRoute: "/",
       routes: {
         "/": (context) => Vote(),

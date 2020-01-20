@@ -12,8 +12,6 @@ class HttpRequest {
         classes = (json.decode(response.body) as List)
             .map((data) => new Classes.fromJson(data))
             .toList();
-
-        print("Big test $classes");
         return classes;
     }
 
