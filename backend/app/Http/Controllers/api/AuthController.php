@@ -23,6 +23,7 @@ class AuthController extends Controller
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed',
+            'resturant_id' => 'required|integer|exists:resturants,id',
         ]);
 
         try {
@@ -32,7 +33,7 @@ class AuthController extends Controller
             $user->email = $request->input('email');
             $plainPassword = $request->input('password');
             $user->password = app('hash')->make($plainPassword);
-
+            $user->resturant_id = $request->input('resturant_id');
             $user->save();
 
             //return successful response
@@ -40,7 +41,7 @@ class AuthController extends Controller
 
         } catch (\Exception $e) {
             //return error message
-            return response()->json(['message' => 'User Registration Failed!'], 409);
+            return response()->json(['message' => 'User Registration Failed!', $e ], 409);
         }
 
     }

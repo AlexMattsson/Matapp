@@ -28,6 +28,18 @@ class UserController extends Controller
     }
 
     /**
+     * Get the authenticated User's position
+     * 
+     * @return Response
+     */
+     public function profilePosition()
+     {
+
+        return response()->json(['user' => Auth::user()->resturant_id], 200);
+
+     }
+
+    /**
      * Get all User.
      *
      * @return Response
