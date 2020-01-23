@@ -23,7 +23,10 @@ export default {
                     password: this.password,
                 })
                 .then(response => {
-                    window.localStorage.setItem('token', response.data.token); // Det ska egentligen vara 'bearer ' + response.data.token här
+                    window.localStorage.setItem(
+                        'token',
+                        String('bearer ' + response.data.token)
+                    );
                     window.location.replace('/');
                 })
                 .catch(error => {
