@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\SchoolClasses;
 use Illuminate\Http\Request;
+use App\Http\Controllers\api\Controller;
 
 class ClassController extends Controller
 {
@@ -16,8 +17,8 @@ class ClassController extends Controller
     {
         return view('class.index', ['data' => SchoolClasses::all()]);
     }
-    
-    
+
+
     private function validateRequest(Request $request)
     {
         return $this->validate($request, [
@@ -38,7 +39,7 @@ class ClassController extends Controller
         return ['Successfully created new class', $data];
     }
 
-    
+
     /**
      * Update the specified resource in storage.
      *
