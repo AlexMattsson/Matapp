@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    public function index() {
+        return view('login');
+    }
+
+
     /**
      * Store a new user.
      *
@@ -67,6 +72,8 @@ class AuthController extends Controller
         }
 
         return $this->respondWithToken($token);
+        //return redirect()->route('index');
+        // return redirect('/');
     }
 
 
