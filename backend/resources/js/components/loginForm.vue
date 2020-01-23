@@ -10,20 +10,26 @@
 export default {
     data() {
         return {
-            email: '', 
-            password: ''
-        }
+            email: '',
+            password: '',
+        };
     },
 
     methods: {
         async login() {
-            let { data } = await axios.post('/login/auth', {
-                    "email": this.email,
-                    "password": this.password
+            await axios
+                .post('/login/auth', {
+                    email: this.email,
+                    password: this.password,
+                })
+                .then(response => {
+                    window.localStorage.setItem('token', response.data.token); // Det ska egentligen vara 'bearer ' + response.data.token här
+                    window.location.replace('/');
+                })
+                .catch(error => {
+                    console.log(error);
                 });
-            window.localStorage.setItem('token', data);
-            window.location.replace('/');
         },
     },
-}
+};
 </script>
