@@ -1,6 +1,7 @@
 <?php
 
 use App\Feedback;
+use Carbon\Carbon;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -14,7 +15,11 @@ use App\Feedback;
 
 //Index page route
 $router->get('/', function () use ($router) {
-    $feedback = Feedback::all();
+    $date1 = Carbon::yesterday()->toDateString();
+    $date2 = Carbon::today()->toDateString();
+
+    $feedback = Feedback::whereBetween('created_at', [$date1, $date2])->get();
+    print("$feedback Date1: $date2");
     return view("index", ['data' => $feedback]);
 });
 

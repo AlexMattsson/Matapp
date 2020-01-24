@@ -10,6 +10,7 @@
                 show-caps>
             </v-date-picker>
         </div>
+        <button v-on:click="search"/>
         <chart :data='data' :resturant="resturant" ></chart>
         <comments :data='data' :resturant='resturant'></comments>
     </div>
@@ -18,15 +19,21 @@
 <script>
 import chart from './chart';
 import comments from './comments';
-// import { vDatePicker } from 'v-calendar';
+import { vDatePicker } from 'v-calendar';
 export default {
     data() {
         return {
             selectedDate: {
                 start: new Date(2019, 12, 1),
-                end: new Date(2019, 12, 5)
+                end: new Date(2019, 12, 5),
             },
         };
+    },
+    methods: {
+        search() {
+            console.log(this.selectedDate.start);
+            console.log(this.selectedDate.end);
+        }
     },
     props: [
         'data',
