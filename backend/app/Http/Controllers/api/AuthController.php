@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         return view('login');
     }
 
@@ -20,7 +21,7 @@ class AuthController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    
+
     public function register(Request $request)
     {
         //validate incoming request 
@@ -43,12 +44,10 @@ class AuthController extends Controller
 
             //return successful response
             return response()->json(['user' => $user, 'message' => 'CREATED'], 201);
-
         } catch (\Exception $e) {
             //return error message
-            return response()->json(['message' => 'User Registration Failed!', $e ], 409);
+            return response()->json(['message' => 'User Registration Failed!', $e], 409);
         }
-
     }
 
     /**
@@ -59,7 +58,7 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-          //validate incoming request 
+        //validate incoming request 
         $this->validate($request, [
             'email' => 'required|string',
             'password' => 'required|string',
@@ -67,15 +66,10 @@ class AuthController extends Controller
 
         $credentials = $request->only(['email', 'password']);
 
-        if (! $token = Auth::attempt($credentials)) {
+        if (!$token = Auth::attempt($credentials)) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 
         return $this->respondWithToken($token);
-        //return redirect()->route('index');
-        // return redirect('/');
     }
-
-
-
 }
