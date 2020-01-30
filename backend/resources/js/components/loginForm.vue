@@ -27,6 +27,8 @@ export default {
                         'token',
                         String('bearer ' + response.data.token)
                     );
+                    var token = localStorage.getItem('token');
+                    document.cookie = 'token' + '=' + response.data.token;
                     window.location.replace('/');
                 })
                 .catch(error => {

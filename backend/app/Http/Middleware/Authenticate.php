@@ -35,15 +35,15 @@ class Authenticate
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        $token = $request->get('token');
+        $token = null;
+        if (isset($_COOKIE['token'])) {
+            $token = $_COOKIE['token'];
+        }
+
         if (!$token) {
             // Unauthorized response if token not there
             return redirect('/login');
         }
-        /* if ($this->auth->guard($guard)->guest()) {
-            // return response('Unauthorized.', 401);
-            return redirect('/login');
-        } */
 
         return $next($request);
     }
