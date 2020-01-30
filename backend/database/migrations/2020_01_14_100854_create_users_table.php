@@ -18,10 +18,10 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique()->notNullable();
             $table->string('password');
-            $table->string('api_token', 80)->after('password')
+            /*$table->string('api_token', 80)
                 ->unique()
                 ->nullable()
-                ->default(null);
+                ->default(null);*/
             $table->integer('resturant_id');
             $table->timestamps();
         });
