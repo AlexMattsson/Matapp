@@ -40,6 +40,7 @@ class AuthController extends Controller
             $plainPassword = $request->input('password');
             $user->password = app('hash')->make($plainPassword);
             $user->resturant_id = $request->input('resturant_id');
+            // $user->token = $this->$token;
             $user->save();
 
             //return successful response
