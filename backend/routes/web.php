@@ -15,11 +15,7 @@ use Carbon\Carbon;
 
 //Index page route
 $router->get('/', function () use ($router) {
-    $date1 = Carbon::yesterday()->toDateString();
-    $date2 = Carbon::today()->toDateString();
-
-    $feedback = Feedback::whereBetween('created_at', [$date1, $date2])->get();
-    print("$feedback Date1: $date2");
+    $feedback = Feedback::all();
     return view("index", ['data' => $feedback]);
 });
 
