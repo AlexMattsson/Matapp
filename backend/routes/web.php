@@ -23,8 +23,11 @@ $router->get('/register', function () {
     return view("register");
 });
 
-$router->group(['middleware' => ['auth']], function (\Laravel\Lumen\Routing\Router $app) {
-    $app->get('/', ['as' => 'index', function () {
+$router->group(['middleware' => ['auth'], 'headers' => [
+    'Authorization' => 'Bearer '->$token,
+    'Accept' => 'application/json'
+]], function (\Laravel\Lumen\Routing\Router $app) {
+    $app->get('/', ['as' => 'index', 'token' => 'exampleToken', function () {
         $feedback = Feedback::all();
         return view("index", ['data' => $feedback]);
     }]);
