@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\api\Controller;
 use App\SchoolClasses;
 use App\Feedback;
 use Illuminate\Http\Request;
