@@ -40,7 +40,6 @@ class AuthController extends Controller
             $plainPassword = $request->input('password');
             $user->password = app('hash')->make($plainPassword);
             $user->resturant_id = $request->input('resturant_id');
-            // $user->token = $this->$token;
             $user->save();
 
             //return successful response
@@ -70,6 +69,10 @@ class AuthController extends Controller
         if (!$token = Auth::attempt($credentials)) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
+
+        $user = User::where('email', $request->only('email'))->first();
+        $user->api_token = $token;
+        $user->save();
 
         return $this->respondWithToken($token);
     }
