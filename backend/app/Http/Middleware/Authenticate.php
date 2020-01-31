@@ -3,7 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\User;
 use Illuminate\Contracts\Auth\Factory as Auth;
+use Illuminate\Database\Eloquent\ModelNotFoundException as Exception;
 
 class Authenticate
 {
@@ -35,13 +37,14 @@ class Authenticate
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        $token = null;
         if (isset($_COOKIE['token'])) {
-            $token = $_COOKIE['token'];
-        }
-
-        if (!$token) {
-            // Unauthorized response if token not there
+            try {
+                $user = User::where('api_token', $_COOKIE['token'])->firstOrFail();
+            } catch (Exception $e) {
+                report($e);
+                return redirect('/login');
+            }
+        } else {
             return redirect('/login');
         }
 
