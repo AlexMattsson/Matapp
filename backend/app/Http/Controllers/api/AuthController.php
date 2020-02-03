@@ -81,7 +81,7 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         if (isset($_COOKIE['token'])) {
-            Cookie::queue(Cookie::forget('token'));
+            return redirect('/auth')->withCookie(Cookie::forget('token'));
         }
 
         return redirect('/auth');
