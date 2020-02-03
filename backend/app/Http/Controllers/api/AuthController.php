@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 
 
 class AuthController extends Controller
@@ -75,5 +76,14 @@ class AuthController extends Controller
         $user->save();
 
         return $this->respondWithToken($token);
+    }
+
+    public function logout(Request $request)
+    {
+        if (isset($_COOKIE['token'])) {
+            Cookie::queue(Cookie::forget('token'));
+        }
+
+        return redirect('/auth');
     }
 }
