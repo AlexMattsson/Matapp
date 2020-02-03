@@ -26,7 +26,7 @@
     </div>
 
     <div class="logout">
-      <form class="form-inline" action="/auth/logout">
+      <form class="form-inline" action="/auth/logout" method="POST">
         <button class="btn" type="submit">Logout</button>
       </form>
 
