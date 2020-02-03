@@ -18,7 +18,7 @@ export default {
     methods: {
         async login() {
             await axios
-                .post('/login/auth', {
+                .post('/auth/login', {
                     email: this.email,
                     password: this.password,
                 })

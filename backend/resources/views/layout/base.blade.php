@@ -24,6 +24,13 @@
         </li>
         
     </div>
+
+    <div class="logout">
+      <form class="form-inline" action="/auth/logout">
+        <button class="btn" type="submit">Logout</button>
+      </form>
+
+    </div>
   </nav>
 <body>
     
