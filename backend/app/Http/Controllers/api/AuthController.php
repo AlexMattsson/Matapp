@@ -5,17 +5,24 @@ namespace App\Http\Controllers\api;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 
 
 class AuthController extends Controller
 {
+    public function index()
+    {
+        return view('login');
+    }
+
+
     /**
      * Store a new user.
      *
      * @param  Request  $request
      * @return Response
      */
-    
+
     public function register(Request $request)
     {
         //validate incoming request 
@@ -38,12 +45,10 @@ class AuthController extends Controller
 
             //return successful response
             return response()->json(['user' => $user, 'message' => 'CREATED'], 201);
-
         } catch (\Exception $e) {
             //return error message
-            return response()->json(['message' => 'User Registration Failed!', $e ], 409);
+            return response()->json(['message' => 'User Registration Failed!', $e], 409);
         }
-
     }
 
     /**
@@ -54,7 +59,7 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-          //validate incoming request 
+        //validate incoming request 
         $this->validate($request, [
             'email' => 'required|string',
             'password' => 'required|string',
@@ -62,13 +67,23 @@ class AuthController extends Controller
 
         $credentials = $request->only(['email', 'password']);
 
-        if (! $token = Auth::attempt($credentials)) {
+        if (!$token = Auth::attempt($credentials)) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
+
+        $user = User::where('email', $request->only('email'))->first();
+        $user->api_token = $token;
+        $user->save();
 
         return $this->respondWithToken($token);
     }
 
+    public function logout(Request $request)
+    {
+        if (isset($_COOKIE['token'])) {
+            return redirect('/auth')->withCookie(Cookie::forget('token'));
+        }
 
-
+        return redirect('/auth');
+    }
 }
