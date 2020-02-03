@@ -13,10 +13,11 @@ use App\Feedback;
 */
 
 $router->group([
-    'prefix' => '/login',
+    'prefix' => '/auth',
 ], function (\Laravel\Lumen\Routing\Router $app) {
     $app->get('/', 'api\AuthController@index');
-    $app->post('/auth', 'api\AuthController@login');
+    $app->post('/login', 'api\AuthController@login');
+    $app->post('/logout', 'api\AuthController@logout');
 });
 
 $router->get('/register', function () {

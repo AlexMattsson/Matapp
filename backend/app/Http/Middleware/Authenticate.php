@@ -42,10 +42,10 @@ class Authenticate
                 $user = User::where('api_token', $_COOKIE['token'])->firstOrFail();
             } catch (Exception $e) {
                 report($e);
-                return redirect('/login');
+                return redirect('/auth');
             }
         } else {
-            return redirect('/login');
+            return redirect('/auth');
         }
 
         return $next($request);
