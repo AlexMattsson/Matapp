@@ -40,16 +40,6 @@ export default {
             let timebetween = this.selectedDate.end.getTime() - this.selectedDate.start.getTime();
             let daysBetween = timebetween / (1000*3600*24);
             var startDate = new Date(this.selectedDate.start);
-            /*for (let i = 0; i < daysBetween; i++) {
-                this.data.forEach(element => {
-                   var newDate = new Date();
-                   newDate.setDate(startDate.getDate()+i);
-                    if (isSameDay(new Date(element.created_at), newDate)) {
-                        console.log("Added " + new Date(element.created_at) + " is equal as " + newDate);
-                        selectedData.push(element);
-                    }
-                });
-            }*/
             let i = 0;
             do {
                 this.data.forEach(element => {

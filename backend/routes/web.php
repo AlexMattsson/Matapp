@@ -1,6 +1,7 @@
 <?php
 
 use App\Feedback;
+use App\User;
 use Carbon\Carbon;
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,10 @@ $router->group([
 ], function (\Laravel\Lumen\Routing\Router $app) {
     $app->get('/', ['as' => 'index', 'token' => 'exampleToken', function () {
         $feedback = Feedback::all();
+    
+        //hitta profil positonen 
+
+
         return view("index", ['data' => $feedback]);
     }]);
 
