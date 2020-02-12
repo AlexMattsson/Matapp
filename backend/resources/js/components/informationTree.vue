@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="checkCreation()">
         <h1 class="text-center pt-2" :class="{'olearys': resturant == 'Olearys'}">{{ resturant }}</h1>
         <div class="container row justify-content-center py-3">
 
@@ -21,7 +21,6 @@ import comments from './comments';
 import { vDatePicker } from 'v-calendar';
 export default {
     data() {
-    
         return {
             selectedDate: {
                 start: new Date(2019, 12, 1),
@@ -32,9 +31,20 @@ export default {
         };
     },
     created() {
+        
         this.selectedData = [...this.data];
     },
     methods: {
+        checkCreation() {
+            if (this.resturant_id == 1 && this.resturant == "Greek grill") {
+                return true;
+            } else if (this.resturant_id == 2 && this.resturant == "Olearys") {
+                return true;
+            } else if (this.resturant_id == 3) {
+                return true;
+            }
+        },
+
         search() {
             let selectedData = [];
             let timebetween = this.selectedDate.end.getTime() - this.selectedDate.start.getTime();
@@ -73,7 +83,8 @@ export default {
     props: [
         'selectedData',
         'data',
-        'resturant'
+        'resturant',
+        'resturant_id'
     ],
     components: {
         chart,
