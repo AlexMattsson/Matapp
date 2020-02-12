@@ -1,6 +1,8 @@
 <?php
 
 use App\Feedback;
+use App\User;
+use Illuminate\Support\Facades\Cookie;
 use Carbon\Carbon;
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +32,12 @@ $router->group([
 ], function (\Laravel\Lumen\Routing\Router $app) {
     $app->get('/', ['as' => 'index', 'token' => 'exampleToken', function () {
         $feedback = Feedback::all();
-        return view("index", ['data' => $feedback]);
+        $user = User::where('api_token', $_COOKIE['token'])->firstOrFail();
+    
+        //hitta profil positonen 
+        
+
+        return view("index", ['data' => $feedback, 'resturant_id' => $user->resturant_id]);
     }]);
 
     //Edit class page route

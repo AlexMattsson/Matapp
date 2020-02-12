@@ -1,4 +1,4 @@
-@extends('layout.base')
+@extends('layout.custom')
 @section('title', 'Login')
 @section('content')
 
